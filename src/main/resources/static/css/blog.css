@@ -3,6 +3,7 @@
 
 .role{
 	float:right;
+	top:0px;
 	color: white;
 }
 
@@ -35,8 +36,8 @@ address {
 }
 
 .form-signin {
-  max-width: 50%;
-  padding: 15px;
+  max-width: 400px;
+  padding: 15px 0px 15px 0px;
   margin: 0 auto;
 }
 .form-signin .form-signin-heading,
@@ -73,6 +74,15 @@ address {
     border-color: #c7b7d6;
 }
 
+.loginclass{
+	width: 400px;
+	margin: auto;
+}
+
+.loginclass a{
+	float: right;
+	color: black;
+}
 
 
 /*--------------------LOGIN------------------------*/
