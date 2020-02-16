@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="hu"	layout:decorator="layouts/main">
+<head>
+	<title>PrÃ³ba alkalmazÃ¡s</title>
+</head>
+<body>
+		
+	<div layout:fragment="loginContent">
+		
+		<article>
+        <header>
+            <h1 th:text="${error}">Ez itt a gond</h1> 
+        </header>
+		
+ 	    <section>
+            <p th:text="${message}">Ez pedig a hozzá tartozó üzenet</p>
+            <p th:text="${timestamp}">Ez pedig a hozzá tartozó üzenet</p>
+            <p th:text="${path}">Ez pedig a hozzá tartozó üzenet</p>
+            <p th:text="${status}">Ez pedig a hozzá tartozó üzenet</p>
+        </section>
+
+    </article>
+
+	</div>
+
+</body>
+</html>
+   
+   
+   
