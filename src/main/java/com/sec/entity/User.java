@@ -1,6 +1,5 @@
 package com.sec.entity;
 
-public class User {
 import java.util.HashSet;
 import java.util.Set;
 
@@ -72,7 +71,6 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
 
 
 	public String getFullName() {
