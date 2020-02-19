@@ -11,18 +11,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sec.entity.User;
 import com.sec.service.EmailService;
+import com.sec.service.UserService;
 
 @Controller
 public class HomeController {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	private EmailService emailService;
-	
+	private UserService userService;
 	
 	@Autowired
 	public void setEmailService(EmailService emailService) {
 		this.emailService = emailService;
 	}
+	
+	@Autowired
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
 
 	@RequestMapping("/")
 	public String home(){
@@ -49,8 +56,10 @@ public class HomeController {
     public String greetingSubmit(@ModelAttribute User user) {
 		log.info("Uj user!");
 		emailService.sendMessage(user.getEmail());
-//		log.debug(user.getUsername());
+//		log.debug(user.getFullName());
+//		log.debug(user.getEmail());
 //		log.debug(user.getPassword());
+		userService.registerUser(user);
         return "auth/login";
     }
 }

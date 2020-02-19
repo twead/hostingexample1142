@@ -77,7 +77,7 @@ public class User {
 		return fullName;
 	}
 
-
+ 
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
@@ -92,4 +92,10 @@ public class User {
 		this.roles = roles;
 	}
 
+	
+	public void addRoles(String roleName) {
+		if(this.roles == null || this.roles.isEmpty())
+			this.roles = new HashSet<>();
+		this.roles.add(new Role(roleName));
+	}
 }

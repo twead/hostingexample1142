@@ -6,17 +6,22 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.sec.entity.Role;
 import com.sec.entity.User;
+import com.sec.repository.RoleRepository;
 import com.sec.repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
 
 	private UserRepository userRepository;
-
+	private RoleRepository roleRepository;
+	private final String USER_ROLE = "USER"; 
+	
 	@Autowired
-	public UserServiceImpl(UserRepository userRepository) {
+	public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
 		this.userRepository = userRepository;
+		this.roleRepository = roleRepository;
 	}
 
 	@Override
@@ -30,6 +35,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		if(user == null) throw new UsernameNotFoundException(username);
 		
 		return new UserDetailsImpl(user);
+	}
+
+	@Override
+	public void registerUser(User user) {
+		Role userRole = roleRepository.findByRole(USER_ROLE);
+		
+		if(userRole != null) {
+			user.getRoles().add(userRole);
+		}else {
+			user.addRoles(USER_ROLE);
+		}
+		
+		userRepository.save(user);
 	}
 	
 }
