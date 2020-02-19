@@ -35,7 +35,7 @@ public class EmailService {
 			javaMailSender.send(message);
 			
 		}catch(Exception ex) {
-			log.error("Hiba az email küldésekor az alábbi címre: "+ email + "!" + ex);
+			log.error("Hiba az email küldésekor az alábbi címre:: "+ email + "!" + ex);
 		}
 	}
 	
