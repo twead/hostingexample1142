@@ -21,19 +21,21 @@ public class User {
 	@Id @GeneratedValue
 	private Long id;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, length = 30)
 	private String username;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, length = 30)
 	private String password;
 	
 	@Column(unique = true, nullable = false)
 	private String email;
 
+	@Column(length = 64)
 	private String fullName;
 	
 	private String address;
 	
+	@Column(length = 32)
 	private String phoneNumber;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

@@ -1,5 +1,6 @@
 package com.sec.service;
 
+import org.jasypt.util.text.BasicTextEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,6 +19,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	private RoleRepository roleRepository;
 	private final String USER_ROLE = "USER"; 
 	
+	private BasicTextEncryptor cryptor;
+	
+
 	@Autowired
 	public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
 		this.userRepository = userRepository;
@@ -48,6 +52,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		}
 		
 		userRepository.save(user);
+	}
+
+	@Override
+	public String encryptingPwd(String password) {
+		cryptor = new BasicTextEncryptor();
+		cryptor.setPassword("a7%w/42@aD.F2&ad3+!P");
+		String text = cryptor.encrypt(password);
+		return text;
 	}
 	
 }

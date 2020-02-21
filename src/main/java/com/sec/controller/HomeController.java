@@ -56,6 +56,8 @@ public class HomeController {
     public String greetingSubmit(@ModelAttribute User user) {
 		log.info("Uj user!");
 		emailService.sendMessage(user.getEmail());
+		
+		user.setPassword(userService.encryptingPwd(user.getPassword()));		
 //		log.debug(user.getFullName());
 //		log.debug(user.getEmail());
 //		log.debug(user.getPassword());

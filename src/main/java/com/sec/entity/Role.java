@@ -3,6 +3,7 @@ package com.sec.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,6 +17,7 @@ public class Role {
 	@Id @GeneratedValue
 	private Long id;
 	
+	@Column(length = 12)
 	private String role;
 
 	@ManyToMany(mappedBy = "roles")
