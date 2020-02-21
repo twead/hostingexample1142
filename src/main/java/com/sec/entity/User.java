@@ -21,13 +21,20 @@ public class User {
 	@Id @GeneratedValue
 	private Long id;
 	
-	@Column(unique = true, nullable = false)
-	private String email;
+	@Column(nullable = false)
+	private String username;
 	
 	@Column(nullable = false)
 	private String password;
 	
+	@Column(unique = true, nullable = false)
+	private String email;
+
 	private String fullName;
+	
+	private String address;
+	
+	private String phoneNumber;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(
@@ -66,6 +73,15 @@ public class User {
 	public String getPassword() {
 		return password;
 	}
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+	public String getUsername() {
+		return username;
+	}
 
 
 	public void setPassword(String password) {
@@ -91,8 +107,28 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-
 	
+	
+	public String getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+
 	public void addRoles(String roleName) {
 		if(this.roles == null || this.roles.isEmpty())
 			this.roles = new HashSet<>();
