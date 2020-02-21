@@ -33,7 +33,7 @@ public class EmailService {
 			message.setTo(email);
 			message.setSubject("Sikeres regisztráció!");
 			message.setText("Kedves "+ email +"! \n \n Köszönjük, hogy regisztráltál az oldalunkra!\n\n"
-					+ "Kérlek kattints a linkre profilod aktiválásához: " + Url + "/activation/" + activation);
+					+ "Kérlek kattints a linkre profilod aktiválásához: " + Url + "activation/" + activation);
 			javaMailSender.send(message);
 			
 		}catch(Exception ex) {
