@@ -15,6 +15,9 @@ public class EmailService {
 	@Value("${spring.mail.username}")
 	private String MESSAGE_FROM;
 	
+	@Value("${url}")
+	private String Url;
+	
 	private JavaMailSender javaMailSender;
 
 	@Autowired
@@ -22,14 +25,15 @@ public class EmailService {
 		this.javaMailSender = javaMailSender;
 	}
 	
-	public void sendMessage(String email) {
+	public void sendMessage(String email, String activation) {
 		SimpleMailMessage message = null;
 		try {
 			message = new SimpleMailMessage();
 			message.setFrom(MESSAGE_FROM);
 			message.setTo(email);
 			message.setSubject("Sikeres regisztráció!");
-			message.setText("Kedves "+ email +"! \n \n Köszönjük, hogy regisztráltál az oldalunkra!");
+			message.setText("Kedves "+ email +"! \n \n Köszönjük, hogy regisztráltál az oldalunkra!\n\n"
+					+ "Kérlek kattints a linkre profilod aktiválásához: " + Url + "/activation/" + activation);
 			javaMailSender.send(message);
 			
 		}catch(Exception ex) {

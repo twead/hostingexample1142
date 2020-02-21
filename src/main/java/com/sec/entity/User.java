@@ -21,10 +21,10 @@ public class User {
 	@Id @GeneratedValue
 	private Long id;
 	
-	@Column(nullable = false, length = 30)
+	@Column(nullable = false, length = 32)
 	private String username;
 	
-	@Column(nullable = false, length = 30)
+	@Column(nullable = false, length = 64)
 	private String password;
 	
 	@Column(unique = true, nullable = false)
@@ -37,6 +37,10 @@ public class User {
 	
 	@Column(length = 32)
 	private String phoneNumber;
+	
+	private String activation;
+	
+	private Boolean enabled;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(
@@ -128,6 +132,26 @@ public class User {
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+	
+
+	public String getActivation() {
+		return activation;
+	}
+
+
+	public void setActivation(String activation) {
+		this.activation = activation;
+	}
+
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
 
 
