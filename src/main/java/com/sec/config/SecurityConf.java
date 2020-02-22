@@ -1,12 +1,12 @@
 package com.sec.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @Configuration
@@ -26,14 +26,22 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
              .roles("ADMIN");
 	}
 	*/
+
+
+	private final UserDetailsService userService;
 	
-	@Autowired
-	private UserDetailsService userService;
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-	@Autowired
-	public void configureAuth(AuthenticationManagerBuilder auth) throws Exception{
-		auth.userDetailsService(userService);
-	}
+	 public SecurityConf(UserDetailsService userService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+	        this.userService = userService;
+	        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+	    }
+
+	
+	@Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
+    }
 
 	
 	@Override
@@ -55,6 +63,7 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 			.logout()
 				.logoutSuccessUrl("/login?logout")
 				.permitAll();
-	}	
+	}
+
 	
 }

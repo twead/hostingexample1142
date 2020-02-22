@@ -1,14 +1,12 @@
 package com.sec.service;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.sec.entity.Role;
@@ -22,6 +20,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	private UserRepository userRepository;
 	private RoleRepository roleRepository;
 	private EmailService emailService;
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	private final String USER_ROLE = "USER"; 
 	
@@ -31,9 +30,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 	@Autowired
-	public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
+	public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
 		this.userRepository = userRepository;
 		this.roleRepository = roleRepository;
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 	}
 
 	@Override
@@ -66,6 +66,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		
 		userToRegister.setActivation(generatedKey());
 		userToRegister.setEnabled(false);
+		userToRegister.setPassword(bCryptPasswordEncoder.encode(userToRegister.getPassword()));
 		userRepository.save(userToRegister);
 		emailService.sendMessage(userToRegister.getEmail(),userToRegister.getActivation(),userToRegister.getFullName());
 		
@@ -91,29 +92,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		user.setActivation("");
 		userRepository.save(user);
 		return "ok";
-	}
-
-	@Override
-	public String encryptThisPassword(String password) {
-		try { 
-            MessageDigest md = MessageDigest.getInstance("SHA-512"); 
-  
-            byte[] messageDigest = md.digest(password.getBytes()); 
-  
-            BigInteger no = new BigInteger(1, messageDigest); 
-  
-            String hashtext = no.toString(16); 
-  
-            while (hashtext.length() < 32) { 
-                hashtext = "0" + hashtext; 
-            } 
-   
-            return hashtext; 
-        } 
-  
-        catch (NoSuchAlgorithmException e) { 
-            throw new RuntimeException(e); 
-        } 
 	}
 	
 }

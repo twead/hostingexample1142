@@ -53,8 +53,7 @@ public class HomeController {
 	@PostMapping("/reg")
     public String greetingSubmit(@ModelAttribute User user) {
 		log.info("Uj user!");
-		
-		user.setPassword(userService.encryptThisPassword(user.getPassword()));	
+
 //		log.debug(user.getFullName());
 //		log.debug(user.getEmail());
 //		log.debug(user.getPassword());

@@ -7,8 +7,6 @@ public interface UserService {
 	public String registerUser(User user);
 
 	public User findByUsername(String username);
-	
-	public  String encryptThisPassword(String password);
 
 	public String userActivation(String code);
 	

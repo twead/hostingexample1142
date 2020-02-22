@@ -37,8 +37,7 @@ public class UserDetailsImpl implements UserDetails {
 	}
 
 	@Override
-	public String getPassword() {					
-		user.setPassword(userService.encryptThisPassword(user.getPassword()));
+	public String getPassword() {
 		return user.getPassword();
 	}
 
