@@ -4,11 +4,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.springframework.security.core.userdetails.UserDetails;
-import org.jasypt.util.text.BasicTextEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.sec.entity.Role;
 import com.sec.entity.User;
@@ -17,7 +16,6 @@ public class UserDetailsImpl implements UserDetails {
 
 	private User user;
 	private UserService userService;
-	private BasicTextEncryptor cryptor;
 
 	@Autowired
 	public void setUserService(UserService userService) {
@@ -39,11 +37,8 @@ public class UserDetailsImpl implements UserDetails {
 	}
 
 	@Override
-	public String getPassword() {
-		cryptor = new BasicTextEncryptor();
-		cryptor.setPassword("a7%w/42@aD.F2&ad3+!P");
-					
-		user.setPassword(cryptor.decrypt(user.getPassword()));
+	public String getPassword() {					
+		user.setPassword(userService.encryptThisPassword(user.getPassword()));
 		return user.getPassword();
 	}
 

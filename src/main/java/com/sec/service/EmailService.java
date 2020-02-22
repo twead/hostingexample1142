@@ -25,14 +25,14 @@ public class EmailService {
 		this.javaMailSender = javaMailSender;
 	}
 	
-	public void sendMessage(String email, String activation) {
+	public void sendMessage(String email, String activation, String fullName) {
 		SimpleMailMessage message = null;
 		try {
 			message = new SimpleMailMessage();
 			message.setFrom(MESSAGE_FROM);
 			message.setTo(email);
 			message.setSubject("Sikeres regisztráció!");
-			message.setText("Kedves "+ email +"! \n \n Köszönjük, hogy regisztráltál az oldalunkra!\n\n"
+			message.setText("Kedves "+ fullName +"! \n \nKöszönjük, hogy regisztráltál az oldalunkra!\n\n"
 					+ "Kérlek kattints a linkre profilod aktiválásához: " + Url + "activation/" + activation);
 			javaMailSender.send(message);
 			

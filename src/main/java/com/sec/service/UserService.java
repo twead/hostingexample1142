@@ -8,8 +8,10 @@ public interface UserService {
 
 	public User findByUsername(String username);
 	
-	public String encryptingPwd(String password);
+	public  String encryptThisPassword(String password);
 
 	public String userActivation(String code);
+	
+	//public String updatePassword();
 	
 }

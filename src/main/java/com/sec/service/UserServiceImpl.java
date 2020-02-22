@@ -1,8 +1,10 @@
 package com.sec.service;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
-import org.jasypt.util.text.BasicTextEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,8 +24,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	private EmailService emailService;
 	
 	private final String USER_ROLE = "USER"; 
-	
-	private BasicTextEncryptor cryptor;
 	
 	@Autowired
 	public void setEmailService(EmailService emailService) {
@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		userToRegister.setActivation(generatedKey());
 		userToRegister.setEnabled(false);
 		userRepository.save(userToRegister);
-		emailService.sendMessage(userToRegister.getEmail(),userToRegister.getActivation());
+		emailService.sendMessage(userToRegister.getEmail(),userToRegister.getActivation(),userToRegister.getFullName());
 		
 		return "ok";
 	}
@@ -82,14 +82,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 	@Override
-	public String encryptingPwd(String password) {
-		cryptor = new BasicTextEncryptor();
-		cryptor.setPassword("a7%w/42@aD.F2&ad3+!P");
-		String text = cryptor.encrypt(password);
-		return text;
-	}
-
-	@Override
 	public String userActivation(String code) {
 		User user = userRepository.findByActivation(code);
 		if(user == null)
@@ -99,6 +91,29 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		user.setActivation("");
 		userRepository.save(user);
 		return "ok";
+	}
+
+	@Override
+	public String encryptThisPassword(String password) {
+		try { 
+            MessageDigest md = MessageDigest.getInstance("SHA-512"); 
+  
+            byte[] messageDigest = md.digest(password.getBytes()); 
+  
+            BigInteger no = new BigInteger(1, messageDigest); 
+  
+            String hashtext = no.toString(16); 
+  
+            while (hashtext.length() < 32) { 
+                hashtext = "0" + hashtext; 
+            } 
+   
+            return hashtext; 
+        } 
+  
+        catch (NoSuchAlgorithmException e) { 
+            throw new RuntimeException(e); 
+        } 
 	}
 	
 }
