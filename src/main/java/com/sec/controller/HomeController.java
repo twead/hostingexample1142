@@ -21,13 +21,11 @@ public class HomeController {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	private UserService userService;
-
 	
 	@Autowired
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
-
 
 	@RequestMapping("/")
 	public String home(){
@@ -51,9 +49,8 @@ public class HomeController {
 	}
 	
 	@PostMapping("/reg")
-    public String greetingSubmit(@ModelAttribute User user) {
+    public String registrationForm(@ModelAttribute User user) {
 		log.info("Uj user!");
-
 //		log.debug(user.getFullName());
 //		log.debug(user.getEmail());
 //		log.debug(user.getPassword());
@@ -65,5 +62,21 @@ public class HomeController {
 	public String activation(@PathVariable("code") String code, HttpServletResponse response) {
 		userService.userActivation(code);
 		return "auth/login";
+	}	
+	
+	@RequestMapping("/forgot")
+	public String forgotPassword(Model model){
+		model.addAttribute("user", new User());
+		return "forgot";
 	}
+	
+	@PostMapping("/resendPWD")
+    public String forgotPasswordForm(@ModelAttribute User user) {
+		User userForgot = userService.findByEmail(user.getEmail());	
+		if(userForgot == null) 
+			return "Nincs ilyen emaillel felhasználó!";		
+		userService.updatePassword(userForgot);
+        return "auth/login";
+    }
+	
 }

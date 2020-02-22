@@ -10,6 +10,6 @@ public interface UserService {
 
 	public String userActivation(String code);
 	
-	//public String updatePassword();
+	public void updatePassword(User user);
 	
 }

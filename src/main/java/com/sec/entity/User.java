@@ -1,6 +1,7 @@
 package com.sec.entity;
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -41,6 +42,8 @@ public class User {
 	private String activation;
 	
 	private Boolean enabled;
+	
+	private String resetToken;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(
@@ -153,6 +156,15 @@ public class User {
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
+	
+	public String getResetToken() {
+		return resetToken;
+	}
+
+
+	public void setResetToken(String resetToken) {
+		this.resetToken = resetToken;
+	}
 
 
 	public void addRoles(String roleName) {
@@ -160,4 +172,5 @@ public class User {
 			this.roles = new HashSet<>();
 		this.roles.add(new Role(roleName));
 	}
+
 }

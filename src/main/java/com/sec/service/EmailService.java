@@ -8,6 +8,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import com.sec.entity.User;
+
 @Service
 public class EmailService {
 	private final Log log = LogFactory.getLog(this.getClass());
@@ -39,6 +41,22 @@ public class EmailService {
 		}catch(Exception ex) {
 			log.error("Hiba az email küldésekor az alábbi címre: "+ email + "!" + ex);
 		}
+	}
+	
+	public void sendNewPasswordRequest(String email, String fullName, String resetToken) {
+		SimpleMailMessage message = null;	
+		
+		try {
+			message = new SimpleMailMessage();
+			message.setFrom(MESSAGE_FROM);
+			message.setTo(email);
+			message.setSubject("Jelszava megváltozott!");
+			message.setText("Kedves "+ fullName +"!\n\nA jelszava a következőre módosult: " + resetToken);
+			javaMailSender.send(message);
+			
+		}catch(Exception ex) {
+			log.error("Hiba az email küldésekor az alábbi címre: "+ email + "!" + ex);
+		} 
 	}
 	
 }

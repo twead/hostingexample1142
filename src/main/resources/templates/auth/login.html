@@ -11,6 +11,8 @@
 				<h2 class="form-signin-heading">Kérlek jelentkezz be</h2>
 				<div id="err" th:if="${param.error}" class="alert alert-danger">Hibás felhasználónév vagy jelszó</div>
 				<div th:if="${param.logout}" class="alert alert-success">Sikeresen kijelentkeztél</div>
+				<div th:if="${param.successReg}" class="alert alert-success">Sikeresen kijelentkeztél</div>	
+				<div th:if="${successReg}" class="alert alert-success">Sikeresen kijelentkeztél</div>				
 				<label for="username" class="sr-only">Felhasználónév</label> 
 				    <input type="text" id="username" name="username" class="form-control" placeholder="Felhasználónév" required="true" /> 
 				<label for="password" class="sr-only">Jelszó</label> 
@@ -22,8 +24,8 @@
 				<button class="btn btn-lg btn-block" type="submit">Bejelentkezés</button>
 			</form>
 			
-			<a href="/registration">Regisztrálni szeretnék</a>
-	
+			<a href="/registration">Regisztrálni szeretnék</a> <br/>
+			<a href="/forgot">Elfelejtettem a jelszavamat</a>
 		</div>
 	</div>
 

@@ -64,6 +64,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			userToRegister.addRoles(USER_ROLE);
 		}
 		
+		userToRegister.setResetToken(generatedKey());
 		userToRegister.setActivation(generatedKey());
 		userToRegister.setEnabled(false);
 		userToRegister.setPassword(bCryptPasswordEncoder.encode(userToRegister.getPassword()));
@@ -92,6 +93,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		user.setActivation("");
 		userRepository.save(user);
 		return "ok";
+	}
+
+	@Override
+	public void updatePassword(User userForgot) {
+		emailService.sendNewPasswordRequest(userForgot.getEmail(), userForgot.getFullName(), userForgot.getResetToken());
+		userForgot.setPassword(bCryptPasswordEncoder.encode(userForgot.getResetToken()));
+		userRepository.save(userForgot);
 	}
 	
 }
