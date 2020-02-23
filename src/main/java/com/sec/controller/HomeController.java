@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sec.entity.User;
+import com.sec.entity.UserProfile;
 import com.sec.service.UserService;
+import com.sec.service.UserServiceImpl;
 
 @Controller
 public class HomeController {
@@ -23,9 +25,11 @@ public class HomeController {
 	private UserService userService;
 	
 	@Autowired
-	public void setUserService(UserService userService) {
+	public void setUserService(UserServiceImpl userService) {
 		this.userService = userService;
 	}
+
+
 
 	@RequestMapping("/")
 	public String home(){

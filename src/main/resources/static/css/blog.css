@@ -59,7 +59,7 @@ header nav ul li a.active{
     color: #fff;
     float: right;
     line-height: 50px;
-    font-size: 17px;
+    font-size: 22px;
     cursor: pointer;
     display: none;
 }
@@ -180,10 +180,8 @@ address {
 .contentcontainer button {
     color: #fff;
     background-color: #292c2f;
-    border-color: 222;
+    border-color: #222;
 }
-
-
 
 
 /*--------------------FOOTER------------------------*/

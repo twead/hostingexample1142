@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.sec.entity.Role;
 import com.sec.entity.User;
+import com.sec.entity.UserProfile;
 import com.sec.repository.RoleRepository;
 import com.sec.repository.UserRepository;
 
@@ -69,12 +70,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			userToRegister.addRoles(USER_ROLE);
 		}
 		
-		userToRegister.setResetToken(generatedKey());
 		userToRegister.setActivation(generatedKey());
 		userToRegister.setEnabled(false);
 		userToRegister.setPassword(bCryptPasswordEncoder.encode(userToRegister.getPassword()));
 		userRepository.save(userToRegister);
-		emailService.sendMessage(userToRegister.getEmail(),userToRegister.getActivation(),userToRegister.getFullName());
+		emailService.sendMessage(userToRegister.getEmail(),userToRegister.getActivation(),userToRegister.getUserProfile().getFullName());
 		
 		return "ok";
 	}
@@ -102,8 +102,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public void updatePassword(User userForgot) {
-		emailService.sendNewPasswordRequest(userForgot.getEmail(), userForgot.getFullName(), userForgot.getResetToken());
+		userForgot.setResetToken(generatedKey());
+		emailService.sendNewPasswordRequest(userForgot.getEmail(), userForgot.getUserProfile().getFullName(), userForgot.getResetToken());
 		userForgot.setPassword(bCryptPasswordEncoder.encode(userForgot.getResetToken()));
+		userForgot.setResetToken("");
 		userRepository.save(userForgot);
 	}
 	
