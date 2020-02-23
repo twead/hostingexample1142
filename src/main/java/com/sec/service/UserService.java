@@ -12,6 +12,6 @@ public interface UserService {
 	
 	public void updatePassword(User user);
 
-	User findByEmail(String email);
+	public User findByEmail(String email);
 	
 }

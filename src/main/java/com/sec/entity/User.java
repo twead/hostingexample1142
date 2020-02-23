@@ -39,6 +39,15 @@ public class User implements Serializable  {
 	
 	@Column(length = 20)
 	private String resetToken;
+	
+	@Column(length = 64)
+	private String address;
+
+	@Column(length = 64)
+	private String fullName;
+
+	@Column(length = 32)
+	private String phoneNumber;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(
@@ -51,19 +60,8 @@ public class User implements Serializable  {
 	@OneToOne(cascade = CascadeType.ALL)
 	private UserProfile userProfile;
 
-
 	public User() {
 		
-	}
-
-	public User(String username, String password, String activation, Boolean enabled, String resetToken, UserProfile userProfile) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.activation = activation;
-		this.enabled = enabled;
-		this.resetToken = resetToken;
-		this.userProfile=userProfile;
 	}
 
 	public String getUsername() {
@@ -142,6 +140,30 @@ public class User implements Serializable  {
 		if(this.roles == null || this.roles.isEmpty())
 			this.roles = new HashSet<>();
 		this.roles.add(new Role(roleName));
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 }
