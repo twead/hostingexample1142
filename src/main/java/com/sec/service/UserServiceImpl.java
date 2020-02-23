@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 	@Override
-	public String registerUser(User userToRegister) {
+	public String registerUser(User userToRegister, String fullName) {
 		User userCheck = userRepository.findByEmail(userToRegister.getEmail());
 		
 		if(userCheck != null) 
@@ -73,8 +73,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		userToRegister.setActivation(generatedKey());
 		userToRegister.setEnabled(false);
 		userToRegister.setPassword(bCryptPasswordEncoder.encode(userToRegister.getPassword()));
+		userToRegister.getUserProfile().setFullName(fullName);
 		userRepository.save(userToRegister);
-		emailService.sendMessage(userToRegister.getEmail(),userToRegister.getActivation(),userToRegister.getFullName());
+		emailService.sendMessage(userToRegister.getEmail(),userToRegister.getActivation(),userToRegister.getUserProfile().getFullName());
 		
 		return "ok";
 	}
@@ -103,7 +104,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	@Override
 	public void updatePassword(User userForgot) {
 		userForgot.setResetToken(generatedKey());
-		emailService.sendNewPasswordRequest(userForgot.getEmail(), userForgot.getFullName(), userForgot.getResetToken());
+		emailService.sendNewPasswordRequest(userForgot.getEmail(), userForgot.getUserProfile().getFullName(), userForgot.getResetToken());
 		userForgot.setPassword(bCryptPasswordEncoder.encode(userForgot.getResetToken()));
 		userForgot.setResetToken("");
 		userRepository.save(userForgot);

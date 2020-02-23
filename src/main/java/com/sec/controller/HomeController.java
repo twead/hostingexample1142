@@ -58,7 +58,10 @@ public class HomeController {
 //		log.debug(user.getFullName());
 //		log.debug(user.getEmail());
 //		log.debug(user.getPassword());
-		userService.registerUser(user);
+		String fullName = user.getUserProfile().getFullName();
+		System.out.println("\n\n\n\n"+fullName+"\n\n\n\n");
+		
+		userService.registerUser(user,fullName);
         return "auth/login";
     }
 	

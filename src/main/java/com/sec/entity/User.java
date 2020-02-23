@@ -43,9 +43,6 @@ public class User implements Serializable  {
 	@Column(length = 64)
 	private String address;
 
-	@Column(length = 64)
-	private String fullName;
-
 	@Column(length = 32)
 	private String phoneNumber;
 
@@ -57,12 +54,29 @@ public class User implements Serializable  {
 			)
 	private Set<Role> roles = new HashSet<Role>();	
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.ALL)
 	private UserProfile userProfile;
 
 	public User() {
 		
 	}
+
+	public User(String username, String password, String email, String activation, Boolean enabled,
+			String resetToken, String address, String phoneNumber, Set<Role> roles, UserProfile userProfile) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.activation = activation;
+		this.enabled = enabled;
+		this.resetToken = resetToken;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+		this.roles = roles;
+		this.userProfile = userProfile;
+	}
+
+
 
 	public String getUsername() {
 		return username;
@@ -148,14 +162,6 @@ public class User implements Serializable  {
 
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	public String getFullName() {
-		return fullName;
-	}
-
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
 	}
 
 	public String getPhoneNumber() {

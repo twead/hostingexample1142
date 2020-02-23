@@ -4,7 +4,7 @@ import com.sec.entity.User;
 
 public interface UserService {
 	
-	public String registerUser(User user);
+	public String registerUser(User user, String fullName);
 
 	public User findByUsername(String username);
 

@@ -3,6 +3,8 @@ package com.sec.entity;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,18 +19,26 @@ public class UserProfile implements Serializable {
 	@Id
 	private Long id;
 	
-    @OneToOne()
+    @OneToOne(mappedBy = "userProfile")
     private User user;
+
+	@Column(length = 64)
+	private String fullName;
     
 	public UserProfile() {
 
     }
 
-
 	public User getUser() {
 		return user;
 	}
 
+
+	public UserProfile(User user, String fullName) {
+		super();
+		this.user = user;
+		this.fullName = fullName;
+	}
 
 	public void setUser(User user) {
 		this.user = user;
@@ -40,6 +50,14 @@ public class UserProfile implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 	
 }
