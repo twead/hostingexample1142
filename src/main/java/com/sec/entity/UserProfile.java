@@ -30,7 +30,7 @@ public class UserProfile {
 	@Column(length = 32)
 	private String phoneNumber;
 
-	@Column(length = 20)
+	@Column(length = 60)
 	private String resetToken;
 
 	@Column(unique = true, nullable = false)

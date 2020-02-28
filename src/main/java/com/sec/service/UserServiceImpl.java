@@ -1,5 +1,6 @@
 package com.sec.service;
 
+import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,12 +102,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 	@Override
-	public void updatePassword(User userForgot) {
-		userForgot.getUserProfile().setResetToken(generatedKey());
-		emailService.sendNewPasswordRequest(userForgot.getUserProfile().getEmail(), userForgot.getUserProfile().getFullName(), userForgot.getUserProfile().getResetToken());
-		userForgot.setPassword(bCryptPasswordEncoder.encode(userForgot.getUserProfile().getResetToken()));
-		userForgot.getUserProfile().setResetToken("");
-		userRepository.save(userForgot);
+	public Optional findUserByEmail(String email) {
+		return userRepository.findUserByEmail(email);
+	}
+
+	@Override
+	public Optional findUserByResetToken(String resetToken) {
+		return userRepository.findByResetToken(resetToken);
+	}
+
+	@Override
+	public void save(User user) {
+		userRepository.save(user);
 	}
 	
 }

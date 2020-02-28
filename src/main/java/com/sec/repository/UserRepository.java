@@ -1,5 +1,7 @@
 package com.sec.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import com.sec.entity.User;
@@ -13,6 +15,12 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	User findByActivation(String activation);
 	
 	@Query(value = "select * from users inner join user_profile on users.user_profile_id = user_profile.id where user_profile.email = ?1", nativeQuery = true)
+	Optional<User> findUserByEmail(String email);
+	
+	@Query(value = "select * from users inner join user_profile on users.user_profile_id = user_profile.id where user_profile.email = ?1", nativeQuery = true)
 	User findByEmail(String email);
 
+	@Query(value = "select * from users inner join user_profile on users.user_profile_id = user_profile.id where user_profile.reset_token = ?1", nativeQuery = true)
+	Optional<User> findByResetToken(String resetToken);
+	
 }

@@ -125,6 +125,14 @@ address {
 	display:inline;
 }
 
+form {
+    max-width: 400px;
+    padding: 15px 0px 15px 0px;
+    margin: 0 auto;
+}
+
+
+
 .form-signin {
   max-width: 400px;
   padding: 15px 0px 15px 0px;

@@ -66,19 +66,4 @@ public class HomeController {
 		return "auth/login";
 	}	
 	
-	@RequestMapping("/forgot")
-	public String forgotPassword(Model model){
-		model.addAttribute("user", new User());
-		return "forgot";
-	}
-	
-	@PostMapping("/resendPWD")
-    public String forgotPasswordForm(@ModelAttribute User user) {
-		User userForgot = userService.findByEmail(user.getUserProfile().getEmail());	
-		if(userForgot == null) 
-			return "Nincs ilyen emaillel felhasználó!";		
-		userService.updatePassword(userForgot);
-        return "auth/login";
-    }
-	
 }

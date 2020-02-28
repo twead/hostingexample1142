@@ -56,7 +56,7 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 				.antMatchers("/registration").permitAll()
 				.antMatchers("/reg").permitAll()
 				.antMatchers("/forgot").permitAll()
-				.antMatchers("/resendPWD").permitAll()
+				.antMatchers("/reset").permitAll()
 				.antMatchers("/activation/**").permitAll()
 				.anyRequest().authenticated()
 				.and()

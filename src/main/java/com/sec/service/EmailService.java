@@ -1,11 +1,16 @@
 package com.sec.service;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.sec.entity.User;
@@ -43,20 +48,24 @@ public class EmailService {
 		}
 	}
 	
-	public void sendNewPasswordRequest(String email, String fullName, String resetToken) {
-		SimpleMailMessage message = null;	
+	@Async
+	public void sendEmail(String to, String subject, String msg) {
 		
-		try {
-			message = new SimpleMailMessage();
-			message.setFrom(MESSAGE_FROM);
-			message.setTo(email);
-			message.setSubject("Jelszava megváltozott!");
-			message.setText("Kedves "+ fullName +"!\n\nA jelszava a következőre módosult: " + resetToken);
-			javaMailSender.send(message);
-			
-		}catch(Exception ex) {
-			log.error("Hiba az email küldésekor az alábbi címre: "+ email + "!" + ex);
-		} 
+		MimeMessage message = javaMailSender.createMimeMessage();
+
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.setText("<html><body>"+msg+"</body></html>", true);
+            helper.setFrom(MESSAGE_FROM);
+            helper.setTo(to);
+            helper.setSubject(subject);
+
+        } catch (MessagingException e) {
+            System.out.println("HIBA"+e);
+            e.printStackTrace();
+        }
+        javaMailSender.send(message);
+
 	}
 	
 }
