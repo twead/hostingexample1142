@@ -1,6 +1,8 @@
 package com.sec.repository;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import com.sec.entity.UserProfile;
 
 import com.sec.entity.User;
 
@@ -12,5 +14,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	
 	User findByEmail(String email);
 
-	//User findByFullName(String fullName);
+	@Query(value = "select u from User u inner join u.userProfile p on u.userProfile = p.id where p.fullName = ?1")
+	User findByProfileFullname(String fullName);
 }

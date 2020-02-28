@@ -77,6 +77,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		userRepository.save(userToRegister);
 		emailService.sendMessage(userToRegister.getEmail(),userToRegister.getActivation(),userToRegister.getUserProfile().getFullName());
 		
+		User user = new User();
+		user = userRepository.findByProfileFullname("Spitzner Mátyás");
+		System.out.println("\n\n\n\n!!!!!" + user.getEmail() + "!!!!!!\n\n\n\n");		
+		
 		return "ok";
 	}
 
@@ -108,6 +112,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		userForgot.setPassword(bCryptPasswordEncoder.encode(userForgot.getResetToken()));
 		userForgot.setResetToken("");
 		userRepository.save(userForgot);
+	}
+
+	@Override
+	public User findByProfileFullname(String fullName) {
+		return userRepository.findByProfileFullname(fullName);
 	}
 	
 }
