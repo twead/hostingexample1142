@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.sec.entity.Role;
 import com.sec.entity.User;
-import com.sec.entity.UserProfile;
 import com.sec.repository.RoleRepository;
 import com.sec.repository.UserRepository;
 
@@ -57,7 +56,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public String registerUser(User userToRegister, String fullName) {
-		User userCheck = userRepository.findByEmail(userToRegister.getEmail());
+		User userCheck = userRepository.findByEmail(userToRegister.getUserProfile().getEmail());
 		
 		if(userCheck != null) 
 			return "Already exist!";
@@ -70,16 +69,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			userToRegister.addRoles(USER_ROLE);
 		}
 		
-		userToRegister.setActivation(generatedKey());
+		userToRegister.getUserProfile().setActivation(generatedKey());
 		userToRegister.setEnabled(false);
 		userToRegister.setPassword(bCryptPasswordEncoder.encode(userToRegister.getPassword()));
 		userToRegister.getUserProfile().setFullName(fullName);
 		userRepository.save(userToRegister);
-		emailService.sendMessage(userToRegister.getEmail(),userToRegister.getActivation(),userToRegister.getUserProfile().getFullName());
-		
-		User user = new User();
-		user = userRepository.findByProfileFullname("Spitzner Mátyás");
-		System.out.println("\n\n\n\n!!!!!" + user.getEmail() + "!!!!!!\n\n\n\n");		
+		emailService.sendMessage(userToRegister.getUserProfile().getEmail(),userToRegister.getUserProfile().getActivation(),userToRegister.getUserProfile().getFullName());
 		
 		return "ok";
 	}
@@ -100,23 +95,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			return "noresult";
 		
 		user.setEnabled(true);
-		user.setActivation("");
+		user.getUserProfile().setActivation("");
 		userRepository.save(user);
 		return "ok";
 	}
 
 	@Override
 	public void updatePassword(User userForgot) {
-		userForgot.setResetToken(generatedKey());
-		emailService.sendNewPasswordRequest(userForgot.getEmail(), userForgot.getUserProfile().getFullName(), userForgot.getResetToken());
-		userForgot.setPassword(bCryptPasswordEncoder.encode(userForgot.getResetToken()));
-		userForgot.setResetToken("");
+		userForgot.getUserProfile().setResetToken(generatedKey());
+		emailService.sendNewPasswordRequest(userForgot.getUserProfile().getEmail(), userForgot.getUserProfile().getFullName(), userForgot.getUserProfile().getResetToken());
+		userForgot.setPassword(bCryptPasswordEncoder.encode(userForgot.getUserProfile().getResetToken()));
+		userForgot.getUserProfile().setResetToken("");
 		userRepository.save(userForgot);
-	}
-
-	@Override
-	public User findByProfileFullname(String fullName) {
-		return userRepository.findByProfileFullname(fullName);
 	}
 	
 }

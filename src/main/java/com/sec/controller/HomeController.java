@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sec.entity.User;
-import com.sec.entity.UserProfile;
 import com.sec.service.UserService;
 import com.sec.service.UserServiceImpl;
 
@@ -28,8 +27,6 @@ public class HomeController {
 	public void setUserService(UserServiceImpl userService) {
 		this.userService = userService;
 	}
-
-
 
 	@RequestMapping("/")
 	public String home(){
@@ -58,9 +55,7 @@ public class HomeController {
 //		log.debug(user.getFullName());
 //		log.debug(user.getEmail());
 //		log.debug(user.getPassword());
-		String fullName = user.getUserProfile().getFullName();
-		System.out.println("\n\n\n\n"+fullName+"\n\n\n\n");
-		
+		String fullName = user.getUserProfile().getFullName();		
 		userService.registerUser(user,fullName);
         return "auth/login";
     }
@@ -79,7 +74,7 @@ public class HomeController {
 	
 	@PostMapping("/resendPWD")
     public String forgotPasswordForm(@ModelAttribute User user) {
-		User userForgot = userService.findByEmail(user.getEmail());	
+		User userForgot = userService.findByEmail(user.getUserProfile().getEmail());	
 		if(userForgot == null) 
 			return "Nincs ilyen emaillel felhasználó!";		
 		userService.updatePassword(userForgot);

@@ -1,5 +1,6 @@
 package com.sec.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -32,10 +33,11 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 	
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-	 public SecurityConf(UserDetailsService userService, BCryptPasswordEncoder bCryptPasswordEncoder) {
-	        this.userService = userService;
-	        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-	    }
+	@Autowired
+	public SecurityConf(UserDetailsService userService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+	       this.userService = userService;
+	       this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+	}
 
 	
 	@Override

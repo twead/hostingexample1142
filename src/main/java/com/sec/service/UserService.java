@@ -10,10 +10,9 @@ public interface UserService {
 
 	public String userActivation(String code);
 	
+	//Elfelejtett jelszó
 	public void updatePassword(User user);
 
 	public User findByEmail(String email);
-	
-	public User findByProfileFullname(String fullName);
-	
+
 }
