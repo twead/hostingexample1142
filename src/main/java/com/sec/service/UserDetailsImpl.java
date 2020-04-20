@@ -15,12 +15,6 @@ import com.sec.entity.User;
 public class UserDetailsImpl implements UserDetails {
 
 	private User user;
-	private UserService userService;
-
-	@Autowired
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
 
 	public UserDetailsImpl(User user) {
 		this.user = user;

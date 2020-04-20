@@ -59,7 +59,7 @@ header nav ul li a.active{
     color: #fff;
     float: right;
     line-height: 50px;
-    font-size: 17px;
+    font-size: 22px;
     cursor: pointer;
     display: none;
 }
@@ -125,6 +125,14 @@ address {
 	display:inline;
 }
 
+form {
+    max-width: 400px;
+    padding: 15px 0px 15px 0px;
+    margin: 0 auto;
+}
+
+
+
 .form-signin {
   max-width: 400px;
   padding: 15px 0px 15px 0px;
@@ -180,10 +188,8 @@ address {
 .contentcontainer button {
     color: #fff;
     background-color: #292c2f;
-    border-color: 222;
+    border-color: #222;
 }
-
-
 
 
 /*--------------------FOOTER------------------------*/

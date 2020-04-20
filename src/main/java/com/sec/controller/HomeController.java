@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sec.entity.User;
 import com.sec.service.UserService;
+import com.sec.service.UserServiceImpl;
 
 @Controller
 public class HomeController {
@@ -23,7 +24,7 @@ public class HomeController {
 	private UserService userService;
 	
 	@Autowired
-	public void setUserService(UserService userService) {
+	public void setUserService(UserServiceImpl userService) {
 		this.userService = userService;
 	}
 
@@ -54,7 +55,8 @@ public class HomeController {
 //		log.debug(user.getFullName());
 //		log.debug(user.getEmail());
 //		log.debug(user.getPassword());
-		userService.registerUser(user);
+		String fullName = user.getUserProfile().getFullName();		
+		userService.registerUser(user,fullName);
         return "auth/login";
     }
 	
@@ -63,20 +65,5 @@ public class HomeController {
 		userService.userActivation(code);
 		return "auth/login";
 	}	
-	
-	@RequestMapping("/forgot")
-	public String forgotPassword(Model model){
-		model.addAttribute("user", new User());
-		return "forgot";
-	}
-	
-	@PostMapping("/resendPWD")
-    public String forgotPasswordForm(@ModelAttribute User user) {
-		User userForgot = userService.findByEmail(user.getEmail());	
-		if(userForgot == null) 
-			return "Nincs ilyen emaillel felhasználó!";		
-		userService.updatePassword(userForgot);
-        return "auth/login";
-    }
 	
 }

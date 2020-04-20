@@ -1,5 +1,6 @@
 package com.sec.service;
 
+import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,8 +56,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 	@Override
-	public String registerUser(User userToRegister) {
-		User userCheck = userRepository.findByEmail(userToRegister.getEmail());
+	public String registerUser(User userToRegister, String fullName) {
+		User userCheck = userRepository.findByEmail(userToRegister.getUserProfile().getEmail());
 		
 		if(userCheck != null) 
 			return "Already exist!";
@@ -69,12 +70,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			userToRegister.addRoles(USER_ROLE);
 		}
 		
-		userToRegister.setResetToken(generatedKey());
-		userToRegister.setActivation(generatedKey());
+		userToRegister.getUserProfile().setActivation(generatedKey());
 		userToRegister.setEnabled(false);
 		userToRegister.setPassword(bCryptPasswordEncoder.encode(userToRegister.getPassword()));
+		userToRegister.getUserProfile().setFullName(fullName);
 		userRepository.save(userToRegister);
-		emailService.sendMessage(userToRegister.getEmail(),userToRegister.getActivation(),userToRegister.getFullName());
+		emailService.sendMessage(userToRegister.getUserProfile().getEmail(),userToRegister.getUserProfile().getActivation(),userToRegister.getUserProfile().getFullName());
 		
 		return "ok";
 	}
@@ -95,16 +96,24 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			return "noresult";
 		
 		user.setEnabled(true);
-		user.setActivation("");
+		user.getUserProfile().setActivation("");
 		userRepository.save(user);
 		return "ok";
 	}
 
 	@Override
-	public void updatePassword(User userForgot) {
-		emailService.sendNewPasswordRequest(userForgot.getEmail(), userForgot.getFullName(), userForgot.getResetToken());
-		userForgot.setPassword(bCryptPasswordEncoder.encode(userForgot.getResetToken()));
-		userRepository.save(userForgot);
+	public Optional findUserByEmail(String email) {
+		return userRepository.findUserByEmail(email);
+	}
+
+	@Override
+	public Optional findUserByResetToken(String resetToken) {
+		return userRepository.findByResetToken(resetToken);
+	}
+
+	@Override
+	public void save(User user) {
+		userRepository.save(user);
 	}
 	
 }
