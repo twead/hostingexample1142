@@ -35,7 +35,7 @@
                 <nav>
                     <ul>
                         <li><a href="/" class="active">Kezdőoldal</a></li>
-                        <li sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')"><a href="/stories">Sztorik</a></li>
+                        <li sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')"><a href="/exercise">Gyakorlatok</a></li>
                         <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="#">Bloggerek</a></li>
                     </ul>
                 </nav>

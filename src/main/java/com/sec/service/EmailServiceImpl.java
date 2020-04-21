@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import com.sec.entity.User;
 
 @Service
-public class EmailService {
+public class EmailServiceImpl {
 	private final Log log = LogFactory.getLog(this.getClass());
 	
 	@Value("${spring.mail.username}")

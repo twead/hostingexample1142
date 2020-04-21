@@ -38,11 +38,6 @@ public class HomeController {
 		return "bloggers";
 	}
 	
-	@RequestMapping("/stories")
-	public String stories(){
-		return "stories";
-	}
-	
 	@RequestMapping("/registration")
 	public String registration(Model model){
 		model.addAttribute("user", new User());

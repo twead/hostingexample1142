@@ -20,21 +20,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	private UserRepository userRepository;
 	private RoleRepository roleRepository;
-	private EmailService emailService;
+	private EmailServiceImpl emailService;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	private final String USER_ROLE = "USER"; 
-	
-	@Autowired
-	public void setEmailService(EmailService emailService) {
-		this.emailService = emailService;
-	}
 
 	@Autowired
-	public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+	public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder, EmailServiceImpl emailService) {
 		this.userRepository = userRepository;
 		this.roleRepository = roleRepository;
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+		this.emailService = emailService;
 	}
 
 	@Override
@@ -45,14 +41,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	@Override
 	public User findByEmail(String email) {	
 		return userRepository.findByEmail(email);
-	}
-
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = findByUsername(username);
-		if(user == null) throw new UsernameNotFoundException(username);
-		
-		return new UserDetailsImpl(user);
 	}
 
 	@Override
@@ -80,15 +68,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		return "ok";
 	}
 
-	private String generatedKey() {
-		Random random = new Random();
-		char[] code = new char[16];
-		for(int i = 0; i < code.length; i++) {
-			code[i] = (char) ('a' + random.nextInt(26));
-		}
-		return new String(code);
-	}
-
 	@Override
 	public String userActivation(String code) {
 		User user = userRepository.findByActivation(code);
@@ -114,6 +93,23 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	@Override
 	public void save(User user) {
 		userRepository.save(user);
+	}
+	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		User user = findByUsername(username);
+		if(user == null) throw new UsernameNotFoundException(username);
+		
+		return new UserDetailsImpl(user);
+	}
+	
+	private String generatedKey() {
+		Random random = new Random();
+		char[] code = new char[16];
+		for(int i = 0; i < code.length; i++) {
+			code[i] = (char) ('a' + random.nextInt(26));
+		}
+		return new String(code);
 	}
 	
 }

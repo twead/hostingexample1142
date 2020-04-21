@@ -6,13 +6,13 @@ import com.sec.entity.User;
 
 public interface UserService {
 	
+	public User findByUsername(String username);
+	
+	public User findByEmail(String email);
+	
 	public String registerUser(User user, String fullName);
 
-	public User findByUsername(String username);
-
 	public String userActivation(String code);
-
-	public User findByEmail(String email);
 	
 	//Elfelejtett jelszóhoz
     public Optional<User> findUserByEmail(String email);

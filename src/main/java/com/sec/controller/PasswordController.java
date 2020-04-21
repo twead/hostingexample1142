@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sec.entity.User;
-import com.sec.service.EmailService;
+import com.sec.service.EmailServiceImpl;
 import com.sec.service.UserService;
 
 
@@ -29,7 +29,7 @@ public class PasswordController {
     private UserService userService;
 
     @Autowired
-    private EmailService emailService;
+    private EmailServiceImpl emailService;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;

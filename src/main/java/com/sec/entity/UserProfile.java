@@ -14,9 +14,6 @@ public class UserProfile {
 	@GeneratedValue
 	@Id
 	private Long id;
-	
-    @OneToOne(mappedBy = "userProfile")
-    private User user;
 
 	@Column(length = 64)
 	private String fullName;
@@ -35,6 +32,9 @@ public class UserProfile {
 
 	@Column(unique = true, nullable = false)
 	private String email;
+	
+    @OneToOne(mappedBy = "userProfile")
+    private User user;
     
 	public UserProfile() {
 
