@@ -20,81 +20,62 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	private UserRepository userRepository;
 	private RoleRepository roleRepository;
-	private EmailService emailService;
+	private EmailServiceImpl emailService;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
-	
-	private final String USER_ROLE = "USER"; 
-	
-	@Autowired
-	public void setEmailService(EmailService emailService) {
-		this.emailService = emailService;
-	}
+
+	private final String USER_ROLE = "USER";
 
 	@Autowired
-	public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+	public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,
+			BCryptPasswordEncoder bCryptPasswordEncoder, EmailServiceImpl emailService) {
 		this.userRepository = userRepository;
 		this.roleRepository = roleRepository;
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+		this.emailService = emailService;
 	}
 
 	@Override
 	public User findByUsername(String username) {
 		return userRepository.findByUsername(username);
-	}	
-
-	@Override
-	public User findByEmail(String email) {	
-		return userRepository.findByEmail(email);
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = findByUsername(username);
-		if(user == null) throw new UsernameNotFoundException(username);
-		
-		return new UserDetailsImpl(user);
+	public User findByEmail(String email) {
+		return userRepository.findByEmail(email);
 	}
 
 	@Override
 	public String registerUser(User userToRegister, String fullName) {
 		User userCheck = userRepository.findByEmail(userToRegister.getUserProfile().getEmail());
-		
-		if(userCheck != null) 
+
+		if (userCheck != null)
 			return "Already exist!";
-		
+
 		Role userRole = roleRepository.findByRole(USER_ROLE);
-		
-		if(userRole != null) {
+
+		if (userRole != null) {
 			userToRegister.getRoles().add(userRole);
-		}else {
+		} else {
 			userToRegister.addRoles(USER_ROLE);
 		}
-		
+
 		userToRegister.getUserProfile().setActivation(generatedKey());
 		userToRegister.setEnabled(false);
 		userToRegister.setPassword(bCryptPasswordEncoder.encode(userToRegister.getPassword()));
-		userToRegister.getUserProfile().setFullName(fullName);
+		if (userToRegister.getUserProfile().getFullName() == null)
+			userToRegister.getUserProfile().setFullName(userToRegister.getUsername());
 		userRepository.save(userToRegister);
-		emailService.sendMessage(userToRegister.getUserProfile().getEmail(),userToRegister.getUserProfile().getActivation(),userToRegister.getUserProfile().getFullName());
-		
-		return "ok";
-	}
+		emailService.sendActivationMessage(userToRegister);
 
-	private String generatedKey() {
-		Random random = new Random();
-		char[] code = new char[16];
-		for(int i = 0; i < code.length; i++) {
-			code[i] = (char) ('a' + random.nextInt(26));
-		}
-		return new String(code);
+		return "ok";
 	}
 
 	@Override
 	public String userActivation(String code) {
 		User user = userRepository.findByActivation(code);
-		if(user == null)
+		if (user == null)
 			return "noresult";
-		
+
 		user.setEnabled(true);
 		user.getUserProfile().setActivation("");
 		userRepository.save(user);
@@ -115,5 +96,23 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public void save(User user) {
 		userRepository.save(user);
 	}
-	
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		User user = findByUsername(username);
+		if (user == null)
+			throw new UsernameNotFoundException(username);
+
+		return new UserDetailsImpl(user);
+	}
+
+	private String generatedKey() {
+		Random random = new Random();
+		char[] code = new char[16];
+		for (int i = 0; i < code.length; i++) {
+			code[i] = (char) ('a' + random.nextInt(26));
+		}
+		return new String(code);
+	}
+
 }

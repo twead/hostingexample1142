@@ -22,48 +22,57 @@ public class HomeController {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	private UserService userService;
-	
+
 	@Autowired
 	public void setUserService(UserServiceImpl userService) {
 		this.userService = userService;
 	}
 
 	@RequestMapping("/")
-	public String home(){
+	public String home() {
 		return "index";
 	}
-	
+
 	@RequestMapping("/bloggers")
-	public String bloggers(){
+	public String bloggers() {
 		return "bloggers";
 	}
-	
-	@RequestMapping("/stories")
-	public String stories(){
-		return "stories";
-	}
-	
+
 	@RequestMapping("/registration")
-	public String registration(Model model){
+	public String registration(Model model) {
 		model.addAttribute("user", new User());
 		return "registration";
 	}
-	
+
 	@PostMapping("/reg")
-    public String registrationForm(@ModelAttribute User user) {
+	public String registrationForm(@ModelAttribute User user, Model model) {
+
+		String existedUsername = user.getUsername();
+		if (userService.findByUsername(existedUsername) != null) {
+			model.addAttribute("existedUsername", existedUsername);
+			return "registration";
+		}
+
+		String existedEmail = user.getUserProfile().getEmail();
+		if (userService.findByEmail(existedEmail) != null) {
+			model.addAttribute("existedEmail", existedEmail);
+			return "registration";
+		}
+
 		log.info("Uj user!");
 //		log.debug(user.getFullName());
 //		log.debug(user.getEmail());
 //		log.debug(user.getPassword());
-		String fullName = user.getUserProfile().getFullName();		
-		userService.registerUser(user,fullName);
-        return "auth/login";
-    }
-	
+		String fullName = user.getUserProfile().getFullName();
+		userService.registerUser(user, fullName);
+		model.addAttribute("registrationSuccessful", "Registration Successful");
+		return "auth/login";
+	}
+
 	@RequestMapping(path = "/activation/{code}", method = RequestMethod.GET)
 	public String activation(@PathVariable("code") String code, HttpServletResponse response) {
 		userService.userActivation(code);
 		return "auth/login";
-	}	
-	
+	}
+
 }

@@ -64,7 +64,7 @@ header nav ul li a.active{
     display: none;
 }
 
-@media(max-width: 700px) {
+@media(max-width: 600px) {
     
 header {
     padding: 0 20px;
@@ -173,7 +173,6 @@ form {
 }
 
 .loginclass{
-	width: 400px;
 	margin: auto;
 }
 
@@ -190,6 +189,14 @@ form {
     background-color: #292c2f;
     border-color: #222;
 }
+
+input {
+	margin-right: 4px;
+  font-family: inherit;
+  @include font-size(inherit);
+  line-height: inherit;
+}
+
 
 
 /*--------------------FOOTER------------------------*/
@@ -233,7 +240,7 @@ form {
 
 /* If you don't want the footer to be responsive, remove these media queries */
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
 
 	.form-signin {
   		max-width: 100%;
