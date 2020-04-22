@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Email;
+
 @Entity
 @Table(name = "user_profile")
 public class UserProfile {
@@ -31,14 +33,15 @@ public class UserProfile {
 	private String resetToken;
 
 	@Column(unique = true, nullable = false)
+	@Email
 	private String email;
-	
-    @OneToOne(mappedBy = "userProfile")
-    private User user;
-    
+
+	@OneToOne(mappedBy = "userProfile")
+	private User user;
+
 	public UserProfile() {
 
-    }
+	}
 
 	public UserProfile(User user, String fullName, String activation, String address, String phoneNumber,
 			String resetToken, String email) {
@@ -51,7 +54,7 @@ public class UserProfile {
 		this.resetToken = resetToken;
 		this.email = email;
 	}
-	
+
 	public User getUser() {
 		return user;
 	}
@@ -87,7 +90,7 @@ public class UserProfile {
 	public String getAddress() {
 		return address;
 	}
-	
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
@@ -95,7 +98,7 @@ public class UserProfile {
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-	
+
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
@@ -115,5 +118,5 @@ public class UserProfile {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 }

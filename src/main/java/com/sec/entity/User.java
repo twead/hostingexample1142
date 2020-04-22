@@ -14,35 +14,34 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "users")
 public class User {
-	
-	@Id @GeneratedValue
+
+	@Id
+	@GeneratedValue
 	private Long id;
-	
-	@Column(nullable = false, length = 32)
+
+	@Column(unique = true, nullable = false, length = 32)
 	private String username;
-	
+
 	@Column(nullable = false, length = 64)
 	private String password;
-	
+
 	private Boolean enabled;
-	
+
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(
-			name = "users_roles",
-			joinColumns = {@JoinColumn(name="user_id")},
-			inverseJoinColumns = {@JoinColumn(name="role_id")}
-			)
-	private Set<Role> roles = new HashSet<Role>();	
-	
-	@OneToOne(cascade=CascadeType.ALL)
+	@JoinTable(name = "users_roles", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "role_id") })
+	private Set<Role> roles = new HashSet<Role>();
+
+	@OneToOne(cascade = CascadeType.ALL)
 	private UserProfile userProfile;
 
 	public User() {
-		
+
 	}
 
 	public User(String username, String password, Boolean enabled, Set<Role> roles, UserProfile userProfile) {
@@ -85,7 +84,7 @@ public class User {
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-	
+
 	public UserProfile getUserProfile() {
 		return userProfile;
 	}
@@ -102,9 +101,8 @@ public class User {
 		this.roles = roles;
 	}
 
-	
 	public void addRoles(String roleName) {
-		if(this.roles == null || this.roles.isEmpty())
+		if (this.roles == null || this.roles.isEmpty())
 			this.roles = new HashSet<>();
 		this.roles.add(new Role(roleName));
 	}

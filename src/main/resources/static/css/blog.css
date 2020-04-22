@@ -190,6 +190,14 @@ form {
     border-color: #222;
 }
 
+input {
+	margin-right: 4px;
+  font-family: inherit;
+  @include font-size(inherit);
+  line-height: inherit;
+}
+
+
 
 /*--------------------FOOTER------------------------*/
 .footer-basic-centered{

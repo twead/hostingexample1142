@@ -12,31 +12,32 @@ import javax.persistence.Table;
 @Table(name = "exercises")
 public class Exercise {
 
-	@GeneratedValue @Id
+	@GeneratedValue
+	@Id
 	private int id;
-	
+
 	@Column(length = 50)
 	private String exerciseName;
-	
+
 	@Column(length = 50)
 	private String effect;
-	
+
 	@Column(length = 50)
 	private String initialPosition;
-	
+
 	@Column(length = 50)
-	private String motion;	
-	
+	private String motion;
+
 	@Column(length = 50)
 	private String trainingTip;
-	
+
 	@Column
 	private int set;
-	
+
 	@Column
 	private int reps;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Muscle muscle;
 
 	public Exercise() {
@@ -127,5 +128,5 @@ public class Exercise {
 	public void setMuscle(Muscle muscle) {
 		this.muscle = muscle;
 	}
-	
+
 }

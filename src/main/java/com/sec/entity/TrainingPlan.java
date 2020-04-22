@@ -12,16 +12,17 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "training_plans")
 public class TrainingPlan {
-	
-	@Id @GeneratedValue
+
+	@Id
+	@GeneratedValue
 	private Long id;
-	
+
 	@Column(nullable = false, length = 32)
 	private String planName;
-	
+
 	@Column(columnDefinition = "TEXT")
-	private String plan_detail;
-	
+	private String planDetail;
+
 	@OneToMany(mappedBy = "trainingPlan")
 	private List<Muscle> muscles;
 
@@ -29,10 +30,10 @@ public class TrainingPlan {
 
 	}
 
-	public TrainingPlan(String planName, String plan_detail, List<Muscle> muscles) {
+	public TrainingPlan(String planName, String planDetail, List<Muscle> muscles) {
 		super();
 		this.planName = planName;
-		this.plan_detail = plan_detail;
+		this.planDetail = planDetail;
 		this.muscles = muscles;
 	}
 
@@ -52,12 +53,12 @@ public class TrainingPlan {
 		this.planName = planName;
 	}
 
-	public String getPlan_detail() {
-		return plan_detail;
+	public String getPlanDetail() {
+		return planDetail;
 	}
 
-	public void setPlan_detail(String plan_detail) {
-		this.plan_detail = plan_detail;
+	public void setPlanDetail(String planDetail) {
+		this.planDetail = planDetail;
 	}
 
 	public List<Muscle> getMuscles() {
@@ -67,5 +68,5 @@ public class TrainingPlan {
 	public void setMuscles(List<Muscle> muscles) {
 		this.muscles = muscles;
 	}
-	
+
 }

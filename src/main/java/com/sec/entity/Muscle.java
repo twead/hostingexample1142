@@ -15,16 +15,17 @@ import javax.persistence.Table;
 @Table(name = "muscles")
 public class Muscle {
 
-	@GeneratedValue @Id
+	@GeneratedValue
+	@Id
 	private int id;
-	
+
 	@Column(length = 30)
 	private String muscleName;
-	
+
 	@OneToMany(mappedBy = "muscle")
 	private List<Exercise> exercises;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	private TrainingPlan trainingPlan;
 
 	public Muscle() {
@@ -69,5 +70,5 @@ public class Muscle {
 	public void setTrainingPlan(TrainingPlan trainingPlan) {
 		this.trainingPlan = trainingPlan;
 	}
-	
+
 }
