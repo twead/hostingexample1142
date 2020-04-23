@@ -13,6 +13,7 @@
 				<div id="err" th:if="${param.error}" class="alert alert-danger" th:text="#{loginParamError}">Hibás felhasználónév vagy jelszó!</div>
 				<div th:if="${param.logout}" class="alert alert-success" th:text="#{loginParamLogout}">Sikeresen kijelentkeztél!</div>			
 				<div th:if="${registrationSuccessful != null}" class="alert alert-success" th:text="#{loginRegistrationSuccessful}"> Sikeres regisztráció! </div>	
+				<div th:if="${activationSuccessful != null}" class="alert alert-success" th:text="#{loginActivationSuccessful}"> Sikeres aktiváció! </div>	
 				    
 				<input type="text" id="username" name="username" class="form-control" th:placeholder="#{loginUsername}" required="true" /> 
 				<input type="password" id="password" name="password" class="form-control" th:placeholder="#{loginPassword}" required="true" />

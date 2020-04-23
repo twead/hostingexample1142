@@ -1,111 +1,137 @@
-
 /*--------------------NAVBAR------------------------*/
-
 body {
-    margin: 0;
-      padding: 0;
-      font-family: sans-serif;
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
 }
 
 header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 0 35px;
-    background: #262626;
-    width: 100%;
-box-sizing: border-box;
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 0 35px;
+	background: #262626;
+	width: 100%;
+	box-sizing: border-box;
 }
 
 header .logo {
-    color: #fff;
-    height: 50px;
-    line-height: 50px;
-    font-size: 17px;
-    float: left;
-    font-weight: bold;
+	color: #fff;
+	height: 50px;
+	line-height: 50px;
+	font-size: 17px;
+	float: left;
+	font-weight: bold;
 }
 
 header nav {
-    float: right;
+	float: right;
 }
 
 header nav ul {
-    margin: 0;
-    padding: 0;
-    display: flex;
+	margin: 0;
+	padding: 0;
+	display: flex;
 }
 
 header nav ul li {
-    list-style: none;
+	list-style: none;
 }
 
 header nav ul li a {
-    height: 50px;
-    line-height: 50px;
-    padding: 0 20px;
-    color: #fff;
-    text-decoration: none;
-    display: block;
+	height: 50px;
+	line-height: 50px;
+	padding: 0 20px;
+	color: #fff;
+	text-decoration: none;
+	display: block;
 }
 
-header nav ul li a:hover,
-header nav ul li a.active{
-    color: #fff;
-    background: #2196f3;
-}
-
-.menu-toggle {
-    color: #fff;
-    float: right;
-    line-height: 50px;
-    font-size: 22px;
-    cursor: pointer;
-    display: none;
-}
-
-@media(max-width: 600px) {
-    
-header {
-    padding: 0 20px;
+header nav ul li a:hover, header nav ul li a.active {
+	color: #fff;
+	background: #2196f3;
 }
 
 .menu-toggle {
-    display: block;
+	color: #fff;
+	float: right;
+	line-height: 50px;
+	font-size: 22px;
+	cursor: pointer;
+	display: none;
 }
 
-header nav {
-    position: absolute;
-    width: 100%;
-    height: calc(100vh - 50px);
-    background: #333;
-    top: 50px;
-    left: -100%;
-    transition: 0.5s;
-}
-    
-header nav.active {
-    left: 0;
+@media ( max-width : 600px) {
+	header {
+		padding: 5px;
+	}
+	.menu-toggle {
+		display: block;
+	}
+	header nav {
+		position: absolute;
+		width: 100%;
+		height: calc(100vh - 50px);
+		background: #333;
+		top: 50px;
+		left: -100%;
+		transition: 0.5s;
+	}
+	header nav.active {
+		left: 0;
+	}
+	header nav ul {
+		display: block;
+		text-align: center;
+	}
+	header nav ul li a {
+		border-bottom: 1px solid rgba(0, 0, 0, .2);
+	}
 }
 
-header nav ul {
-    display: block;
-    text-align: center;
+/*--------------------Language------------------------*/
+#languageSelect {
+	padding-left: 10px;
+	display: block;
+	float: right;
+	line-height: 48px;
+	display: block;
+	color: white;
 }
-    
-header nav ul li a {
-    border-bottom: 1px solid rgba(0,0,0,.2);
-}    
+
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none; /* Remove default arrow */
+	background: #262626;
+	color: white;
+	border-color: #262626;
 }
+
+.col-sm-4 {
+	position: static;
+}
+
+@media ( max-width : 600px) {
+	#languageSelect {
+		padding-left: 10px;
+		display: block;
+		float: left;
+		line-height: 48px;
+		display: block;
+		color: white;
+	}
+}
+
 /*--------------------Valami------------------------*/
 .contentcontainer {
 	width: 95%;
 	height: auto;
-	margin-top:80px;
-    padding-right: auto;
-    padding-left: auto;
-    margin-right: auto;
-    margin-left: auto;
+	margin-top: 80px;
+	padding-right: auto;
+	padding-left: auto;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 header h1 {
@@ -118,154 +144,144 @@ p, address, section {
 }
 
 address {
-	margin-top:20px;
+	margin-top: 20px;
 }
 
 #frmlogout {
-	display:inline;
+	display: inline;
 }
 
 form {
-    max-width: 400px;
-    padding: 15px 0px 15px 0px;
-    margin: 0 auto;
+	max-width: 400px;
+	padding: 15px 0px 15px 0px;
+	margin: 0 auto;
 }
-
-
 
 .form-signin {
-  max-width: 400px;
-  padding: 15px 0px 15px 0px;
-  margin: 0 auto;
+	max-width: 400px;
+	padding: 15px 0px 15px 0px;
+	margin: 0 auto;
 }
-.form-signin .form-signin-heading,
+
+.form-signin .form-signin-heading, .form-signin .checkbox {
+	margin-bottom: 10px;
+}
+
 .form-signin .checkbox {
-  margin-bottom: 10px;
+	font-weight: normal;
 }
-.form-signin .checkbox {
-  font-weight: normal;
-}
+
 .form-signin .form-control {
-  position: relative;
-  height: auto;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-  padding: 10px;
-  font-size: 16px;
+	position: relative;
+	height: auto;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 10px;
+	font-size: 16px;
 }
+
 .form-signin .form-control:focus {
-  z-index: 2;
+	z-index: 2;
 }
+
 .form-signin input[type="text"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
 }
+
 .form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
 }
 
 .navbar-default .navbar-collapse, .navbar-default .navbar-form {
-    border-color: #c7b7d6;
+	border-color: #c7b7d6;
 }
 
-.loginclass{
+.loginclass {
 	margin: auto;
 }
 
-.loginclass a{
+.loginclass a {
 	float: right;
 	color: black;
 }
 
-
 /*--------------------LOGIN------------------------*/
-
 .contentcontainer button {
-    color: #fff;
-    background-color: #292c2f;
-    border-color: #222;
+	color: #fff;
+	background-color: #292c2f;
+	border-color: #222;
 }
 
 input {
 	margin-right: 4px;
-  font-family: inherit;
-  @include font-size(inherit);
-  line-height: inherit;
+	font-family: inherit; @ include font-size(inherit);
+	line-height: inherit;
 }
 
-
-
 /*--------------------FOOTER------------------------*/
-.footer-basic-centered{
+.footer-basic-centered {
 	background-color: #292c2f;
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
 	box-sizing: border-box;
 	width: 100%;
 	text-align: center;
 	font: normal 18px sans-serif;
-
 	padding: 25px;
 	margin-top: 80px;
 }
 
-.footer-basic-centered .footer-company-motto{
-	color:  #8d9093;
+.footer-basic-centered .footer-company-motto {
+	color: #8d9093;
 	font-size: 24px;
 	margin: 0;
 }
 
-.footer-basic-centered .footer-company-name{
-	color:  #8f9296;
+.footer-basic-centered .footer-company-name {
+	color: #8f9296;
 	font-size: 14px;
 	margin: 0;
 }
 
-.footer-basic-centered .footer-links{
+.footer-basic-centered .footer-links {
 	list-style: none;
 	font-weight: bold;
-	color:  #ffffff;
+	color: #ffffff;
 	padding: 35px 0 23px;
 	margin: 0;
 }
 
-.footer-basic-centered .footer-links a{
-	display:inline-block;
+.footer-basic-centered .footer-links a {
+	display: inline-block;
 	text-decoration: none;
 	color: inherit;
 }
 
 /* If you don't want the footer to be responsive, remove these media queries */
-
-@media (max-width: 600px) {
-
+@media ( max-width : 600px) {
 	.form-signin {
-  		max-width: 100%;
-  		padding: 15px 0px 15px 0px;
- 		 margin: 0 auto;
+		max-width: 100%;
+		padding: 15px 0px 15px 0px;
+		margin: 0 auto;
 	}
-	
-	.footer-basic-centered{
+	.footer-basic-centered {
 		padding: 35px;
 	}
-
-	.footer-basic-centered .footer-company-motto{
+	.footer-basic-centered .footer-company-motto {
 		font-size: 18px;
 	}
-
-	.footer-basic-centered .footer-company-name{
+	.footer-basic-centered .footer-company-name {
 		font-size: 12px;
 	}
-
-	.footer-basic-centered .footer-links{
+	.footer-basic-centered .footer-links {
 		font-size: 14px;
 		padding: 25px 0 20px;
 	}
-
-	.footer-basic-centered .footer-links a{
+	.footer-basic-centered .footer-links a {
 		line-height: 1.8;
 	}
 }

@@ -1,5 +1,7 @@
 package com.sec.controller;
 
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -70,8 +72,10 @@ public class HomeController {
 	}
 
 	@RequestMapping(path = "/activation/{code}", method = RequestMethod.GET)
-	public String activation(@PathVariable("code") String code, HttpServletResponse response) {
+	public String activation(@PathVariable("code") String code, HttpServletResponse response, Model model) {
+		
 		userService.userActivation(code);
+		model.addAttribute("activationSuccessful", "Activation Successful");
 		return "auth/login";
 	}
 
