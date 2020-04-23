@@ -9,6 +9,8 @@ public interface UserService {
 	public User findByUsername(String username);
 
 	public User findByEmail(String email);
+	
+	public User findByActivation(String code);
 
 	public String registerUser(User user, String fullName);
 

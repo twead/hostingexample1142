@@ -43,6 +43,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public User findByEmail(String email) {
 		return userRepository.findByEmail(email);
 	}
+	
+	public User findByActivation(String code) {
+		return userRepository.findByActivation(code);
+	}
 
 	@Override
 	public String registerUser(User userToRegister, String fullName) {
