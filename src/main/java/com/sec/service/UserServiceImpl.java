@@ -1,5 +1,6 @@
 package com.sec.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -117,6 +118,21 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			code[i] = (char) ('a' + random.nextInt(26));
 		}
 		return new String(code);
+	}
+
+	@Override
+	public List<User> findAllProfessionals() {
+		return userRepository.findAllProfessionals();
+	}
+
+	@Override
+	public User findById(Long id) {
+		return userRepository.findById(id);
+	}
+
+	@Override
+	public void delete(User professional) {
+		userRepository.delete(professional);
 	}
 
 }

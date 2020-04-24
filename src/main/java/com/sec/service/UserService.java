@@ -1,8 +1,10 @@
 package com.sec.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.sec.entity.User;
+
 
 public interface UserService {
 
@@ -22,5 +24,11 @@ public interface UserService {
 	public Optional<User> findUserByResetToken(String resetToken);
 
 	public void save(User user);
+	
+	public List<User> findAllProfessionals();
+	
+	public User findById(Long id);
+
+	public void delete(User professional);
 
 }

@@ -15,8 +15,8 @@
 				<div th:if="${registrationSuccessful != null}" class="alert alert-success" th:text="#{loginRegistrationSuccessful}"> Sikeres regisztráció! </div>	
 				<div th:if="${activationSuccessful != null}" class="alert alert-success" th:text="#{loginActivationSuccessful}"> Sikeres aktiváció! </div>	
 				    
-				<input type="text" id="username" name="username" class="form-control" th:placeholder="#{loginUsername}" required="true" /> 
-				<input type="password" id="password" name="password" class="form-control" th:placeholder="#{loginPassword}" required="true" />
+				<input type="text" id="username" name="username" class="form-control" th:placeholder="#{username}" required="true" /> 
+				<input type="password" id="password" name="password" class="form-control" th:placeholder="#{password}" required="true" />
 				
 				<div class="checkbox">
 					<input id="remember-me" name="remember-me" type="checkbox" th:text="#{loginRememberMe}"/>

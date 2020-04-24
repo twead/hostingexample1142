@@ -123,6 +123,19 @@ select {
 	}
 }
 
+
+
+/*--------------------Display Professionals------------------------*/
+
+div.card {
+  position: static;
+}
+
+.col-md-10{
+	position: static;
+}
+
+
 /*--------------------Valami------------------------*/
 .contentcontainer {
 	width: 95%;

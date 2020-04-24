@@ -11,7 +11,7 @@
 			<h2 class="form-signin-heading" th:text="#{registrationHeader}">Kérlek regisztrálj!</h2>
 				
 				<input type="text" id="username" name="username" th:field="*{username}" class="form-control" 
-				th:placeholder="#{registrationUsername}" required="true" pattern=".{5,}" 
+				th:placeholder="#{username}" required="true" pattern=".{5,}" 
 				th:title="#{registrationUsernameCriterium}" />
 				
 				<div th:if="${existedUsername != null}" class="alert alert-danger notification" role="alert" th:text="#{registrationExistedUsername}">
@@ -19,20 +19,20 @@
 				</div>
 							
 				<input type="password" id="password" name="password" th:field="*{password}" class="form-control" 
-				th:placeholder="#{registrationPassword}" required="true" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+				th:placeholder="#{password}" required="true" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
 				th:title="#{registrationPasswordCriterium}" /> 
 				
 				<input type="text" id="email" name="email" th:field="*{userProfile.email}" class="form-control" 
-				th:placeholder="#{registrationEmail}" required="true" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+				th:placeholder="#{email}" required="true" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
 				th:title="#{registrationEmailCriterium}" />
 				
 				<div th:if="${existedEmail != null}" class="alert alert-danger notification" role="alert" th:text="#{registrationExistedEmail}">
 				    Ez az email cím már létezik!
 				</div>
 				
-				<input type="text" id="fullName" name="fullName" th:field="*{userProfile.fullName}" class="form-control" th:placeholder="#{registrationFullName}"  />
-		 	    <input type="text" id="address" name="address" th:field="*{userProfile.address}" class="form-control" th:placeholder="#{registrationAddress}"  />
-		 	    <input type="text" id="phoneNumber" name="phoneNumber" th:field="*{userProfile.phoneNumber}" class="form-control" th:placeholder="#{registrationNumber}"  />
+				<input type="text" id="fullName" name="fullName" th:field="*{userProfile.fullName}" class="form-control" th:placeholder="#{fullName}"  />
+		 	    <input type="text" id="address" name="address" th:field="*{userProfile.address}" class="form-control" th:placeholder="#{address}"  />
+		 	    <input type="text" id="phoneNumber" name="phoneNumber" th:field="*{userProfile.phoneNumber}" class="form-control" th:placeholder="#{number}"  />
 			    
 			<button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{registrationRegistration}">Regisztráció</button>
 		</form>

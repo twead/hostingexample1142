@@ -1,7 +1,5 @@
 package com.sec.controller;
 
-import java.util.Locale;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -33,11 +31,6 @@ public class HomeController {
 	@RequestMapping("/")
 	public String home() {
 		return "index";
-	}
-
-	@RequestMapping("/bloggers")
-	public String bloggers() {
-		return "bloggers";
 	}
 
 	@RequestMapping("/registration")

@@ -8,10 +8,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Próba alkalmazás</title>
 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-<link rel="stylesheet" href="../static/css/blog.css"
-	th:href="@{/css/blog.css}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="../static/css/blog.css" th:href="@{/css/blog.css}" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" />
+
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -44,7 +44,7 @@
 		</div>
 		<div id="languageSelect">
 			(<select id="locales">
-				<option value="" th:text="#{lang.actual}"></option>
+				<option value="" hidden="true" th:text="#{lang.actual}"></option>
 				<option value="en" th:text="#{lang.eng}"></option>
 				<option value="hu" th:text="#{lang.hu}"></option>
 			</select>)
@@ -54,18 +54,15 @@
 				<li><a href="/" class="active" th:text="#{mainHome}">Kezdőoldal</a></li>
 				<li sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')"><a
 					href="/exercise" th:text="#{mainExercises}">Gyakorlatok</a></li> 
-				<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="#">Bloggerek</a></li>
+				<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/professionals/list" th:text="#{mainProfessionals}">Szakértők</a></li>
 			</ul>
 		</nav>
 		<div class="menu-toggle"
 			sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
 			<b>&#9776;</b>
 		</div>
-
-
-
+		
 	</header>
-
 
 
 
