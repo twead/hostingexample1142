@@ -22,7 +22,7 @@
 				th:placeholder="#{password}" required="true" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
 				th:title="#{registrationPasswordCriterium}" /> 
 				
-				<input type="text" id="email" name="email" th:field="*{userProfile.email}" class="form-control" 
+				<input type="text" id="email" name="email" th:field="*{email}" class="form-control" 
 				th:placeholder="#{email}" required="true" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
 				th:title="#{registrationEmailCriterium}" />
 				

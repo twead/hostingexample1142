@@ -15,25 +15,25 @@
                     <form action="#" th:action="@{/professionals/update/{id}(id=${professional.id})}" th:object="${professional}" method="post">
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="name" class="col-form-label" th:text="#{username}">Username</label> <input type="text" th:field="*{username}" class="form-control" id="username" th:placeholder="#{username}"/> <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger"></span>
+                                <label for="username" class="col-form-label" th:text="#{username}">Username</label> <input type="text" th:field="*{username}" class="form-control" id="username" th:placeholder="#{username}"/>
                             </div>
                             <div class="form-group col-md-8">
-                                <label for="password" class="col-form-label" th:text="#{password}">Password</label> <input type="password" th:field="*{password}" class="form-control" id="password" th:placeholder="#{password}"/> <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
+                                <label for="password" class="col-form-label" th:text="#{password}">Password</label> <input type="password" th:field="*{password}" class="form-control" id="password" th:placeholder="#{password}"/>
                             </div>
                             <div class="form-group col-md-8">
-                                <label for="username" class="col-form-label">Email</label> <input type="text" th:field="*{userProfile.email}" class="form-control" id="email" placeholder="Email"/> <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger"></span>
+                                <label for="email" class="col-form-label">Email</label> <input type="text" th:field="*{email}" class="form-control" id="email" placeholder="Email"/>
                             </div>
                             <div class="form-group col-md-8">
-                                <label for="username" class="col-form-label" th:text="#{fullName}">Full name</label> <input type="text" th:field="*{userProfile.fullName}" class="form-control" id="fullName" th:placeholder="#{fullName}"/> <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger"></span>
+                                <label for="fullName" class="col-form-label" th:text="#{fullName}">Full name</label> <input type="text" th:field="*{userProfile.fullName}" class="form-control" id="fullName" th:placeholder="#{fullName}"/> 
                             </div>
                             <div class="form-group col-md-8">
-                                <label for="password" class="col-form-label" th:text="#{address}">Address</label> <input type="text" th:field="*{userProfile.address}" class="form-control" id="address" th:placeholder="#{address}"/> <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
+                                <label for="address" class="col-form-label" th:text="#{address}">Address</label> <input type="text" th:field="*{userProfile.address}" class="form-control" id="address" th:placeholder="#{address}"/> 
                             </div>
                             <div class="form-group col-md-8">
-                                <label for="enabled" class="col-form-label" th:text="#{number}">Phone number</label> <input type="text" th:field="*{userProfile.phoneNumber}" class="form-control" id="phoneNumber" th:placeholder="#{number}"/> <span th:if="${#fields.hasErrors('enabled')}" th:errors="*{enabled}" class="text-danger"></span>
+                                <label for="number" class="col-form-label" th:text="#{number}">Phone number</label> <input type="text" th:field="*{userProfile.phoneNumber}" class="form-control" id="phoneNumber" th:placeholder="#{number}"/> 
                             </div>
                             <div class="form-group col-md-8">
-                                <label for="enabled" class="col-form-label" th:text="#{enabled}">Enabled</label> <input type="text" th:field="*{enabled}" class="form-control" id="enabled" th:placeholder="#{enabled}"/> <span th:if="${#fields.hasErrors('enabled')}" th:errors="*{enabled}" class="text-danger"></span>
+                                <label for="enabled" class="col-form-label" th:text="#{enabled}">Enabled</label> <input type="text" th:field="*{enabled}" class="form-control" id="enabled" th:placeholder="#{enabled}"/>
                             </div>
 
                             <div class="form-group col-md-8">

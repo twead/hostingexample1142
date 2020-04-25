@@ -48,7 +48,7 @@ public class HomeController {
 			return "registration";
 		}
 
-		String existedEmail = user.getUserProfile().getEmail();
+		String existedEmail = user.getEmail();
 		if (userService.findByEmail(existedEmail) != null) {
 			model.addAttribute("existedEmail", existedEmail);
 			return "registration";

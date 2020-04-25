@@ -1,13 +1,12 @@
 package com.sec.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.hibernate.validator.constraints.Email;
 
 @Entity
 @Table(name = "user_profile")
@@ -32,10 +31,6 @@ public class UserProfile {
 	@Column(length = 60)
 	private String resetToken;
 
-	@Column(unique = true, nullable = false)
-	@Email
-	private String email;
-
 	@OneToOne(mappedBy = "userProfile")
 	private User user;
 
@@ -44,7 +39,7 @@ public class UserProfile {
 	}
 
 	public UserProfile(User user, String fullName, String activation, String address, String phoneNumber,
-			String resetToken, String email) {
+			String resetToken) {
 		super();
 		this.user = user;
 		this.fullName = fullName;
@@ -52,7 +47,6 @@ public class UserProfile {
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.resetToken = resetToken;
-		this.email = email;
 	}
 
 	public User getUser() {
@@ -109,14 +103,6 @@ public class UserProfile {
 
 	public void setResetToken(String resetToken) {
 		this.resetToken = resetToken;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 }

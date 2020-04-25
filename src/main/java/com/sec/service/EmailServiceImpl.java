@@ -41,7 +41,7 @@ public class EmailServiceImpl {
 		try {
 			message = new SimpleMailMessage();
 			message.setFrom(MESSAGE_FROM);
-			message.setTo(userToRegister.getUserProfile().getEmail());
+			message.setTo(userToRegister.getEmail());
 			message.setSubject("Sikeres regisztráció!");
 			message.setText("Kedves " + userToRegister.getUserProfile().getFullName()
 					+ "! \n \nKöszönjük, hogy regisztráltál az oldalunkra!\n\n"
@@ -50,7 +50,7 @@ public class EmailServiceImpl {
 			javaMailSender.send(message);
 
 		} catch (Exception ex) {
-			log.error("Hiba az email küldésekor az alábbi címre: " + userToRegister.getUserProfile().getEmail() + "!"
+			log.error("Hiba az email küldésekor az alábbi címre: " + userToRegister.getEmail() + "!"
 					+ ex);
 		}
 	}

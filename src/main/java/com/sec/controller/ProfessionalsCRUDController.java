@@ -75,7 +75,6 @@ public class ProfessionalsCRUDController {
 	@GetMapping("/professionals/edit/{id}")
 	public String showUpdateForm(@PathVariable ("id") long id, Model model) {
 		User professional = this.userService.findById(id);
-				//.orElseThrow(() -> new IllegalArgumentException("Invalid professional id : " + id));
 		
 		model.addAttribute("professional", professional);
 		return "update-professional";
@@ -88,10 +87,16 @@ public class ProfessionalsCRUDController {
 			return "update-professional";
 		}
 		
-		// update student
+		Role userRole = roleRepository.findByRole(USER_ROLE);
+
+		if (userRole != null) {
+			professional.getRoles().add(userRole);
+		} else {
+			professional.addRoles(USER_ROLE);
+		}
+		
 		userService.save(professional);
 		
-		// get all professionals ( with update)
 		model.addAttribute("professionals", this.userService.findAllProfessionals());
 		return "display-professionals";
 	}
@@ -100,7 +105,6 @@ public class ProfessionalsCRUDController {
 	public String deleteProfessional(@PathVariable ("id") long id, Model model) {
 		
 		User professional = this.userService.findById(id);
-				//.orElseThrow(() -> new IllegalArgumentException("Invalid professional id : " + id));
 		
 		this.userService.delete(professional);
 		model.addAttribute("professionals", this.userService.findAllProfessionals());

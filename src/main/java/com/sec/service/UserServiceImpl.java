@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public String registerUser(User userToRegister, String fullName) {
-		User userCheck = userRepository.findByEmail(userToRegister.getUserProfile().getEmail());
+		User userCheck = userRepository.findByEmail(userToRegister.getEmail());
 
 		if (userCheck != null)
 			return "Already exist!";

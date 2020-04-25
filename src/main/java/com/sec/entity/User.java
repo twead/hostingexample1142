@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Email;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -28,28 +30,33 @@ public class User {
 
 	@Column(nullable = false, length = 64)
 	private String password;
+	
+	@Column(unique = true, nullable = false)
+	@Email
+	private String email;
 
 	private Boolean enabled;
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "users_roles", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "role_id") })
 	private Set<Role> roles = new HashSet<Role>();
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade= CascadeType.ALL)
 	private UserProfile userProfile;
 
 	public User() {
 
 	}
 
-	public User(String username, String password, Boolean enabled, Set<Role> roles, UserProfile userProfile) {
+	public User(String username, String password, Boolean enabled, Set<Role> roles, UserProfile userProfile, String email) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
 		this.roles = roles;
 		this.userProfile = userProfile;
+		this.email = email;
 	}
 
 	public Long getId() {
@@ -74,6 +81,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Boolean getEnabled() {

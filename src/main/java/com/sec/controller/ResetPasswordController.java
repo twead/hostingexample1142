@@ -63,7 +63,7 @@ public class ResetPasswordController {
 			String appUrl = request.getScheme() + "://" + request.getServerName();
 
 			// Email message
-			emailService.sendForgotPasswordEmail(user.getUserProfile().getEmail(), "Elfelejtett jelszó",
+			emailService.sendForgotPasswordEmail(user.getEmail(), "Elfelejtett jelszó",
 					"Hogy megújítsd a jelszavad, kattints az alábbi linkre:\n" + appUrl + "/reset?token="
 							+ user.getUserProfile().getResetToken());
 
