@@ -45,13 +45,13 @@ public class HomeController {
 		String existedUsername = user.getUsername();
 		if (userService.findByUsername(existedUsername) != null) {
 			model.addAttribute("existedUsername", existedUsername);
-			return "registration";
+			return "forward:registration";
 		}
 
 		String existedEmail = user.getEmail();
 		if (userService.findByEmail(existedEmail) != null) {
 			model.addAttribute("existedEmail", existedEmail);
-			return "registration";
+			return "forward:registration";
 		}
 
 		log.info("Uj user!");

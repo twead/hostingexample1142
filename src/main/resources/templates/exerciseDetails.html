@@ -14,9 +14,8 @@
 				<div class="col-lg-4 col-md-6 mb-4" th:each="exercise : ${exercises}">
 					
 					<div class="card h-100">
-						<a th:href="@{'/exercise/'+${exercise.muscle.muscleName}+'/'+${exercise.exerciseName} }">
+
 							<img class="card-img-top img-responsive" th:src="${exercise.exerciseImage}" height="250" width="100" />
-						</a>
 						
 						<div class="card-body">
 							<h4 class="card-title">

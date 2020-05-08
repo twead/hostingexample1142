@@ -8,14 +8,14 @@
 	<div layout:fragment="loginContent">
 
 		<div class="container text-center">
-			<h3>Válaszd ki milyen gyakorlatokat szeretnél</h3>
+			<h3>Válaszd ki melyik izomcsoportra szeretnél gyakorlatokat.</h3>
 			<br />
 			<div class="row">
-				<div class="col-lg-4 col-md-6 mb-4" th:each="exercise : ${exercises}">
+				<div class="col-lg-4 col-md-6 mb-4" th:each="muscle : ${muscles}">
 					
 					<div class="card h-100">
-						<a th:href="@{'/exercise/'+${exercise.muscle.muscleName}+'/'+${exercise.exerciseName} }">
-							<img class="card-img-top img-responsive" th:src="${exercise.exerciseImage}" height="250" width="100" />
+						<a th:href="@{'/exercise/'+${muscle.muscleName}}">
+							<img class="card-img-top img-responsive" th:src="${muscle.muscleImage}" height="250" width="100" />
 						</a>
 						
 						<div class="card-body">
@@ -24,7 +24,7 @@
 							</h4>
 						</div>
 						<div class="card-footer">
-							<a th:text="${exercise.exerciseName}">Neve</a>
+							<a th:text="${muscle.muscleName}">Neve</a>
 						</div>
 					</div>
 					

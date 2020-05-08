@@ -3,7 +3,6 @@ package com.sec.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -12,23 +11,27 @@ import javax.persistence.Table;
 @Table(name = "exercises")
 public class Exercise {
 
-	@GeneratedValue
+	/*@GeneratedValue
 	@Id
 	private int id;
-
+*/
+	@Id
 	@Column(length = 50)
 	private String exerciseName;
+	
+	@Column
+	private String exerciseImage;
 
-	@Column(length = 50)
+	@Column(columnDefinition = "TEXT")
 	private String effect;
 
-	@Column(length = 50)
+	@Column(columnDefinition = "TEXT")
 	private String initialPosition;
 
-	@Column(length = 50)
+	@Column(columnDefinition = "TEXT")
 	private String motion;
 
-	@Column(length = 50)
+	@Column(columnDefinition = "TEXT")
 	private String trainingTip;
 
 	@Column
@@ -44,10 +47,11 @@ public class Exercise {
 		super();
 	}
 
-	public Exercise(String exerciseName, String effect, String initialPosition, String motion, String trainingTip,
+	public Exercise(String exerciseName, String exerciseImage, String effect, String initialPosition, String motion, String trainingTip,
 			int set, int reps, Muscle muscle) {
 		super();
 		this.exerciseName = exerciseName;
+		this.exerciseImage = exerciseImage;
 		this.effect = effect;
 		this.initialPosition = initialPosition;
 		this.motion = motion;
@@ -57,13 +61,13 @@ public class Exercise {
 		this.muscle = muscle;
 	}
 
-	public int getId() {
+	/*public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
-	}
+	}*/
 
 	public String getExerciseName() {
 		return exerciseName;
@@ -71,6 +75,14 @@ public class Exercise {
 
 	public void setExerciseName(String exerciseName) {
 		this.exerciseName = exerciseName;
+	}
+
+	public String getExerciseImage() {
+		return exerciseImage;
+	}
+
+	public void setExerciseImage(String exerciseImage) {
+		this.exerciseImage = exerciseImage;
 	}
 
 	public String getEffect() {

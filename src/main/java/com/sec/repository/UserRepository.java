@@ -33,5 +33,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	@Query(value = "select * from users join users_roles on users.id = user_id join roles on roles.id = role_id where role_id=2", nativeQuery = true)
 	List<User> findAllProfessionals();
 	
+	@Query(value = "select * from users inner join user_profile on users.user_profile_id = user_profile.id where users.id = ?1", nativeQuery = true)
 	User findById(Long id);
 }

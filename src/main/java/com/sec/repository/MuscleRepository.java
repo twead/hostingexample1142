@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.sec.entity.Muscle;
 
 @Repository
-public interface MuscleRepository extends CrudRepository<Muscle, Long>{
+public interface MuscleRepository extends CrudRepository<Muscle, String>{
 
 	public List<Muscle> findAll();
 	

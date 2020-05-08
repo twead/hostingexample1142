@@ -34,7 +34,6 @@ public class ProfessionalsCRUDController {
 		this.roleRepository = roleRepository;
 	}
 
-
 	@RequestMapping("/professionals/list")
 	public String index(User professional) {
 		return "display-professionals";
@@ -84,6 +83,7 @@ public class ProfessionalsCRUDController {
 	public String updateProfessional(@PathVariable("id") long id, @Valid User professional, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			professional.setId(id);
+			professional.getUserProfile().setId(id);
 			return "update-professional";
 		}
 		
@@ -95,6 +95,7 @@ public class ProfessionalsCRUDController {
 			professional.addRoles(USER_ROLE);
 		}
 		
+		professional.getUserProfile().setId(id);
 		userService.save(professional);
 		
 		model.addAttribute("professionals", this.userService.findAllProfessionals());

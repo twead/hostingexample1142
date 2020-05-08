@@ -34,7 +34,7 @@ public class ResetPasswordController {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	// forgotPassword oldal megjelenítése
+	
 	@RequestMapping(value = "/forgot", method = RequestMethod.GET)
 	public String displayForgotPasswordPage() {
 		return "forgotPassword";

@@ -136,6 +136,16 @@ div.card {
 }
 
 
+
+
+
+
+/*--------------------Display Muscles------------------------*/
+.col-md-8, .col-md-6{
+	position: inherit;
+}
+
+
 /*--------------------Valami------------------------*/
 .contentcontainer {
 	width: 95%;
@@ -145,6 +155,11 @@ div.card {
 	padding-left: auto;
 	margin-right: auto;
 	margin-left: auto;
+}
+
+.container{
+	min-height: 700px;
+	position: inherit;
 }
 
 header h1 {
@@ -237,6 +252,7 @@ input {
 }
 
 /*--------------------FOOTER------------------------*/
+
 .footer-basic-centered {
 	background-color: #292c2f;
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);

@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -15,12 +14,16 @@ import javax.persistence.Table;
 @Table(name = "muscles")
 public class Muscle {
 
-	@GeneratedValue
+	/*@GeneratedValue
 	@Id
 	private int id;
-
+*/
+	@Id
 	@Column(length = 30)
 	private String muscleName;
+	
+	@Column
+	private String muscleImage;
 
 	@OneToMany(mappedBy = "muscle")
 	private List<Exercise> exercises;
@@ -32,27 +35,36 @@ public class Muscle {
 
 	}
 
-	public Muscle(String muscleName, List<Exercise> exercises, TrainingPlan trainingPlan) {
+	public Muscle(String muscleName, String muscleImage, List<Exercise> exercises, TrainingPlan trainingPlan) {
 		super();
 		this.muscleName = muscleName;
+		this.muscleImage = muscleImage;
 		this.exercises = exercises;
 		this.trainingPlan = trainingPlan;
 	}
 
-	public int getId() {
+	/*public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
 	}
-
+*/
 	public String getMuscleName() {
 		return muscleName;
 	}
 
 	public void setMuscleName(String muscleName) {
 		this.muscleName = muscleName;
+	}
+
+	public String getMuscleImage() {
+		return muscleImage;
+	}
+
+	public void setMuscleImage(String muscleImage) {
+		this.muscleImage = muscleImage;
 	}
 
 	public List<Exercise> getExercises() {

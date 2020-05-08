@@ -54,7 +54,7 @@ public class EmailServiceImpl {
 					+ ex);
 		}
 	}
-
+	
 	@Async
 	public void sendForgotPasswordEmail(String to, String subject, String msg) {
 
