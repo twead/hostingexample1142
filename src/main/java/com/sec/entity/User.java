@@ -16,8 +16,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.Email;
-
 @Entity
 @Table(name = "users")
 public class User {
@@ -33,7 +31,7 @@ public class User {
 	private String password;
 	
 	@Column(unique = true, nullable = false)
-	@Email
+	//@Email
 	private String email;
 
 	private Boolean enabled;

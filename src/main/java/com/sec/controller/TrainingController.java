@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sec.entity.Exercise;
-import com.sec.repository.ExerciseRepository;
 import com.sec.service.ExerciseService;
 import com.sec.service.MuscleService;
 

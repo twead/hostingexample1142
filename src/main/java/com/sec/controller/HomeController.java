@@ -2,8 +2,6 @@ package com.sec.controller;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +17,9 @@ import com.sec.service.UserServiceImpl;
 
 @Controller
 public class HomeController {
+	
+	private final String USER_ROLE = "USER";
 
-	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	private UserService userService;
 
 	@Autowired
@@ -54,14 +53,15 @@ public class HomeController {
 			return "forward:registration";
 		}
 
-		log.info("Uj user!");
-//		log.debug(user.getFullName());
-//		log.debug(user.getEmail());
-//		log.debug(user.getPassword());
-		String fullName = user.getUserProfile().getFullName();
-		userService.registerUser(user, fullName);
+		userService.registerUser(user, USER_ROLE);
 		model.addAttribute("registrationSuccessful", "Registration Successful");
 		return "auth/login";
+	}
+	
+	//Nyelv váltáskor hibaablak kiküszöbölése
+	@RequestMapping(path = "/reg", method = RequestMethod.GET)
+	public String returnToRegistrationForm() {
+		return "forward:registration";
 	}
 
 	@RequestMapping(path = "/activation/{code}", method = RequestMethod.GET)
@@ -71,5 +71,5 @@ public class HomeController {
 		model.addAttribute("activationSuccessful", "Activation Successful");
 		return "auth/login";
 	}
-
+	
 }
