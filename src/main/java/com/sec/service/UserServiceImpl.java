@@ -67,7 +67,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		userToRegister.setPassword(bCryptPasswordEncoder.encode(userToRegister.getPassword()));
 		if (userToRegister.getUserProfile().getFullName() == null)
 			userToRegister.getUserProfile().setFullName(userToRegister.getUsername());
+		userRepository.save(userToRegister);	
+		
+
+		if(userRole.getRole().equals("PROFESSIONAL")) {
+			userToRegister.getRoles().add(roleRepository.findByRole("USER"));
+		}
 		userRepository.save(userToRegister);
+
 		emailService.sendActivationMessage(userToRegister);
 
 		return "ok";

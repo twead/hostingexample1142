@@ -11,7 +11,7 @@
         <h3 th:text="#{displayProfAddBtn}"> Add professional</h3>
         <div class="card">
             <div class="card-body">
-                <div class="col-md-10">
+                <div class="col-md-14">
                     <form th:action="@{/professionals/add}" th:object="${professional}" method="post">
                         <div class="row">
                             <div class="form-group col-md-8">
@@ -23,7 +23,7 @@
                             </div>
                             <div class="form-group col-md-8">
                                 <label for="password" class="col-form-label" th:text="#{password}">Password</label> 
-                                <input type="password" th:field="*{password}" class="form-control" id="password" th:placeholder="#{password}" required="true" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" th:title="#{registrationPasswordCriterium}"/>     
+                                <input type="password" th:field="*{password}" class="form-control" id="password" th:placeholder="#{password}" required="true" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" th:title="#{registrationPasswordCriterium}"/>
                             </div>
                             <div class="form-group col-md-8">
                                 <label for="email" class="col-form-label">Email</label> 

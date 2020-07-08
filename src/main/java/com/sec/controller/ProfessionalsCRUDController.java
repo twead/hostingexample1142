@@ -62,6 +62,7 @@ public class ProfessionalsCRUDController {
     public String returnToSaveProduct(@ModelAttribute User professional, Model model) {   	
         return "redirect:/professionals/showform";
     }
+    
 
     @RequestMapping(path = "/professionals/edit/{id}", method = RequestMethod.GET)
     public String editProduct(Model model, @PathVariable(value = "id") Long id) {    	
@@ -92,13 +93,13 @@ public class ProfessionalsCRUDController {
 		
 	}
     
-    //Nyelv váltásakor hibaablak kiküszöbölése
-    @RequestMapping(path = "/professionals/update/{id}",  method = RequestMethod.GET)
-    public String returnToSaveProduct(@PathVariable("id") long id, @ModelAttribute User professional, Model model) {
+    //hiba bekövetkeztekor hibaoldal kiküszöbölése
+   /* @RequestMapping(path = "/professionals/update/{id}",  method = RequestMethod.GET)
+    public String returnToSaveProduct(@PathVariable("id") long id, Model model) {
     	model.addAttribute("existedUsername", "existed username");
     	
         return "redirect:/professionals/edit/{id}";
-    }
+    }*/
     
     @RequestMapping(path = "/professionals/delete/{id}", method = RequestMethod.GET)
     public String deleteProduct(@PathVariable(name = "id") Long id, Model model) {
