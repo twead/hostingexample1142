@@ -6,7 +6,7 @@
 <body>
 
 	<div layout:fragment="loginContent">
-		<div class="loginclass">
+
 			<form name="login" th:action="@{/login}" method="post" class="form-signin">
 				<h2 class="form-signin-heading" th:text="#{loginHeader}">Kérlek jelentkezz be!</h2>
 				
@@ -23,13 +23,13 @@
 				</div>
 				
 				<button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{loginLogin}">Bejelentkezés</button>
-				<a href="/registration" th:text="#{loginRegistration}">Regisztrálni szeretnék</a> <br/>
-				<a href="/forgot" th:text="#{loginForgotPassword}">Elfelejtettem a jelszavamat</a>
+				<a class="loginA" href="/registration" th:text="#{loginRegistration}">Regisztrálni szeretnék</a> <br/>
+				<a class="loginA" href="/forgot" th:text="#{loginForgotPassword}">Elfelejtettem a jelszavamat</a>
 			</form>
 			
 
 		</div>
-	</div>
+
 
 </body>
 </html>

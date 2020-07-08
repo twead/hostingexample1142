@@ -14,7 +14,7 @@ public interface UserService {
 	
 	public User findByActivation(String code);
 
-	public String registerUser(User user, String fullName);
+	public String registerUser(User user, String role);
 
 	public String userActivation(String code);
 
@@ -31,4 +31,9 @@ public interface UserService {
 
 	public void delete(User professional);
 
+	public User findExistUsernameForUpdate(String username, Long id);
+	
+	public User findExistEmailForUpdate(String email, Long id);
+	
+	public void updateUser(User user, String role);
 }

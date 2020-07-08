@@ -11,8 +11,8 @@
         <h3 th:text="#{displayProfAddBtn}"> Add professional</h3>
         <div class="card">
             <div class="card-body">
-                <div class="col-md-10">
-                    <form action="#" th:action="@{/professionals/add}" th:object="${user}" method="post">
+                <div class="col-md-14">
+                    <form th:action="@{/professionals/add}" th:object="${professional}" method="post">
                         <div class="row">
                             <div class="form-group col-md-8">
                                 <label for="username" class="col-form-label" th:text="#{username}">Username</label> 
@@ -23,7 +23,7 @@
                             </div>
                             <div class="form-group col-md-8">
                                 <label for="password" class="col-form-label" th:text="#{password}">Password</label> 
-                                <input type="password" th:field="*{password}" class="form-control" id="password" th:placeholder="#{password}" required="true" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" th:title="#{registrationPasswordCriterium}"/>     
+                                <input type="password" th:field="*{password}" class="form-control" id="password" th:placeholder="#{password}" required="true" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" th:title="#{registrationPasswordCriterium}"/>
                             </div>
                             <div class="form-group col-md-8">
                                 <label for="email" class="col-form-label">Email</label> 
@@ -43,10 +43,6 @@
                             <div class="form-group col-md-8">
                                 <label for="number" class="col-form-label" th:text="#{number}">Phone number</label> 
                                 <input type="text" th:field="*{userProfile.phoneNumber}" class="form-control" id="phoneNumber" th:placeholder="#{number}"/> 
-                            </div>
-                            <div class="form-group col-md-8">
-                                <label for="enabled" class="col-form-label" th:text="#{enabled}">Enabled</label> 
-                                <input type="text" th:field="*{enabled}" class="form-control" id="enabled" th:placeholder="#{enabled}"/> 
                             </div>
 
                             <div class="col-md-6">

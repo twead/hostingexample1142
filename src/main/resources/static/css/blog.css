@@ -61,7 +61,7 @@ header nav ul li a:hover, header nav ul li a.active {
 	display: none;
 }
 
-@media ( max-width : 600px) {
+@media ( max-width : 800px) {
 	header {
 		padding: 5px;
 	}
@@ -108,11 +108,7 @@ select {
 	border-color: #262626;
 }
 
-.col-sm-4 {
-	position: static;
-}
-
-@media ( max-width : 600px) {
+@media ( max-width : 1000px) {
 	#languageSelect {
 		padding-left: 10px;
 		display: block;
@@ -121,32 +117,18 @@ select {
 		display: block;
 		color: white;
 	}
+	
+
+	.table-responsive-md {
+	    display: block;
+	    width: 100%;
+	    overflow-x: auto;
+	    -webkit-overflow-scrolling: touch;
+	}
 }
 
 
-
-/*--------------------Display Professionals------------------------*/
-
-div.card {
-  position: static;
-}
-
-.col-md-10{
-	position: static;
-}
-
-
-
-
-
-
-/*--------------------Display Muscles------------------------*/
-.col-md-8, .col-md-6{
-	position: inherit;
-}
-
-
-/*--------------------Valami------------------------*/
+/*--------------------Container------------------------*/
 .contentcontainer {
 	width: 95%;
 	height: auto;
@@ -155,12 +137,12 @@ div.card {
 	padding-left: auto;
 	margin-right: auto;
 	margin-left: auto;
-}
-
-.container{
 	min-height: 700px;
 	position: inherit;
 }
+
+
+/*--------------------Inputs,Buttons,Etc..------------------------*/
 
 header h1 {
 	font-family: 'Calibri', sans-serif;
@@ -179,12 +161,6 @@ address {
 	display: inline;
 }
 
-form {
-	max-width: 400px;
-	padding: 15px 0px 15px 0px;
-	margin: 0 auto;
-}
-
 .form-signin {
 	max-width: 400px;
 	padding: 15px 0px 15px 0px;
@@ -193,10 +169,6 @@ form {
 
 .form-signin .form-signin-heading, .form-signin .checkbox {
 	margin-bottom: 10px;
-}
-
-.form-signin .checkbox {
-	font-weight: normal;
 }
 
 .form-signin .form-control {
@@ -209,36 +181,23 @@ form {
 	font-size: 16px;
 }
 
-.form-signin .form-control:focus {
-	z-index: 2;
-}
-
 .form-signin input[type="text"] {
 	margin-bottom: -1px;
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 0;
 }
 
 .form-signin input[type="password"] {
 	margin-bottom: 10px;
-	border-top-left-radius: 0;
-	border-top-right-radius: 0;
 }
 
-.navbar-default .navbar-collapse, .navbar-default .navbar-form {
-	border-color: #c7b7d6;
-}
-
-.loginclass {
-	margin: auto;
-}
-
-.loginclass a {
+.loginA {
 	float: right;
 	color: black;
 }
 
-/*--------------------LOGIN------------------------*/
+.col-md-10, .col-md-8, .col-md-6, div.card{
+	position: static;
+}
+
 .contentcontainer button {
 	color: #fff;
 	background-color: #292c2f;
@@ -251,7 +210,8 @@ input {
 	line-height: inherit;
 }
 
-/*--------------------FOOTER------------------------*/
+
+/*--------------------Footer------------------------*/
 
 .footer-basic-centered {
 	background-color: #292c2f;

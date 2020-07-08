@@ -59,6 +59,7 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 				.antMatchers("/reset").permitAll()
 				.antMatchers("/login").permitAll()
 				.antMatchers("/activation/**").permitAll()
+				.antMatchers("/css/**").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
@@ -69,6 +70,6 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 				.logoutSuccessUrl("/login?logout")
 				.permitAll();
 	}
-
+	
 	
 }

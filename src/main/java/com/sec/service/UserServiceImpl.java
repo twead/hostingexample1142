@@ -24,8 +24,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	private EmailServiceImpl emailService;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	private final String USER_ROLE = "USER";
-
 	@Autowired
 	public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,
 			BCryptPasswordEncoder bCryptPasswordEncoder, EmailServiceImpl emailService) {
@@ -50,18 +48,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 	@Override
-	public String registerUser(User userToRegister, String fullName) {
+	public String registerUser(User userToRegister, String role) {
 		User userCheck = userRepository.findByEmail(userToRegister.getEmail());
 
 		if (userCheck != null)
 			return "Already exist!";
 
-		Role userRole = roleRepository.findByRole(USER_ROLE);
+		Role userRole = roleRepository.findByRole(role);
 
 		if (userRole != null) {
 			userToRegister.getRoles().add(userRole);
 		} else {
-			userToRegister.addRoles(USER_ROLE);
+			userToRegister.addRoles(role);
 		}
 
 		userToRegister.getUserProfile().setActivation(generatedKey());
@@ -69,7 +67,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		userToRegister.setPassword(bCryptPasswordEncoder.encode(userToRegister.getPassword()));
 		if (userToRegister.getUserProfile().getFullName() == null)
 			userToRegister.getUserProfile().setFullName(userToRegister.getUsername());
+		userRepository.save(userToRegister);	
+		
+
+		if(userRole.getRole().equals("PROFESSIONAL")) {
+			userToRegister.getRoles().add(roleRepository.findByRole("USER"));
+		}
 		userRepository.save(userToRegister);
+
 		emailService.sendActivationMessage(userToRegister);
 
 		return "ok";
@@ -127,12 +132,37 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public User findById(Long id) {
-		return userRepository.findById(id);
+		User user = userRepository.findById(id).get();;
+		return user;
 	}
 
 	@Override
 	public void delete(User professional) {
 		userRepository.delete(professional);
+	}
+
+	@Override
+	public User findExistUsernameForUpdate(String username, Long id) {
+		return userRepository.findExistUsernameForUpdate(username, id);
+	}
+
+	@Override
+	public User findExistEmailForUpdate(String email, Long id) {
+		return userRepository.findExistEmailForUpdate(email, id);
+	}
+	
+	@Override
+	public void updateUser(User user, String role) {
+		
+		Role userRole = roleRepository.findByRole(role);
+
+		if (userRole != null) {
+			user.getRoles().add(userRole);
+		} else {
+			user.addRoles(role);
+		}
+		
+		userRepository.save(user);
 	}
 
 }

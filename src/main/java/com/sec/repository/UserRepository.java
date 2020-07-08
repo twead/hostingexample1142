@@ -34,5 +34,11 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	List<User> findAllProfessionals();
 	
 	@Query(value = "select * from users inner join user_profile on users.user_profile_id = user_profile.id where users.id = ?1", nativeQuery = true)
-	User findById(Long id);
+	Optional<User> findById(Long id);
+	
+	@Query(value = "select * from users where username = ?1 and id != ?2", nativeQuery = true)
+	User findExistUsernameForUpdate(String username,Long id);
+	
+	@Query(value = "select * from users where email = ?1 and id != ?2", nativeQuery = true)
+	User findExistEmailForUpdate(String email, Long id);
 }
