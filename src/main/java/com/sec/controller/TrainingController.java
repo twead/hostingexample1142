@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.sec.entity.Muscle;
 import com.sec.service.ExerciseService;
 import com.sec.service.MuscleService;
 
@@ -32,17 +33,21 @@ public class TrainingController {
 		return "muscle";
 	}
 	
-	@RequestMapping(path = "/exercise/{name}", method = RequestMethod.GET)
-	public String exercise(@PathVariable("name") String name, Model model) {
+	@RequestMapping(path = "/exercise/{muscleurl}", method = RequestMethod.GET)
+	public String exercise(@PathVariable("muscleurl") String muscleUrl, Model model) {
 		
-		model.addAttribute("exercises", exerciseService.findAllByMuscleName(name));
+		String muscleName = muscleService.findMuscleNameByUrl(muscleUrl);
+		
+		//A muscle neve az exercise másodlagos kulcsa, csak muscle name alapján lehet exerciset keresni, így előtte az url-ből meg kell állapítani a muscle namet.
+		model.addAttribute("exercises", exerciseService.findAllByMuscleName(muscleName));
 		return "exercise";
 	}
 	
-	@RequestMapping(path = "/exercise/{musclename}/{exercisename}", method = RequestMethod.GET)
-	public String exerciseDetail(@PathVariable("exercisename") String name, Model model) {
+	@RequestMapping(path = "/exercise/{muscleurl}/{exerciseurl}", method = RequestMethod.GET)
+	public String exerciseDetail(@PathVariable("exerciseurl") String exerciseUrl, Model model) {
 		
-		model.addAttribute("exercises", exerciseService.findAllByMuscleName(name));
+		model.addAttribute("exercises", exerciseService.findByExerciseUrl(exerciseUrl));
+		
 		return "exerciseDetails";
 	}
 

@@ -11,4 +11,6 @@ public interface ExerciseService {
 
 	public List<Exercise> findAllByMuscleName(String name);
 	
+	public Exercise findByExerciseUrl(String url);
+	
 }

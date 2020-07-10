@@ -11,4 +11,6 @@ public interface MuscleService {
 
 	public List<Muscle> findAll();
 	
+	public String findMuscleNameByUrl(String url);
+	
 }

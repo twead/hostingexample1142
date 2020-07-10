@@ -11,10 +11,6 @@ import javax.persistence.Table;
 @Table(name = "exercises")
 public class Exercise {
 
-	/*@GeneratedValue
-	@Id
-	private int id;
-*/
 	@Id
 	@Column(length = 50)
 	private String exerciseName;
@@ -39,6 +35,9 @@ public class Exercise {
 
 	@Column
 	private int reps;
+	
+	@Column(length = 50)
+	private String url;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Muscle muscle;
@@ -60,14 +59,6 @@ public class Exercise {
 		this.reps = reps;
 		this.muscle = muscle;
 	}
-
-	/*public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}*/
 
 	public String getExerciseName() {
 		return exerciseName;
@@ -140,5 +131,29 @@ public class Exercise {
 	public void setMuscle(Muscle muscle) {
 		this.muscle = muscle;
 	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
+	
+//	public String getUrl() {
+//		String url = exerciseName.toLowerCase()
+//				.replace(" ", "-")
+//				.replace("á", "a")
+//				.replace("í", "i")
+//				.replace('é','e')
+//				.replace('ű','u')
+//				.replace('ú','u')
+//				.replace('ü','u')
+//				.replace('ö','o')
+//				.replace('ó','o')
+//				.replace('ő','o');
+//		return url;
+//	}
 
 }

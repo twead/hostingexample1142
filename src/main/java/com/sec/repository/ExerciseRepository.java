@@ -14,6 +14,7 @@ public interface ExerciseRepository extends CrudRepository<Exercise, String>{
 	@Query(value = "select * from exercises where muscle_muscle_name = ?1", nativeQuery = true)
 	public List<Exercise> findAllByMuscleName(String name);
 	
-	@Query(value = "select * from exercises where exercise_name = ?1", nativeQuery = true)
-	public List<Exercise> findAllByExerciseName(String name);
+	@Query(value = "select * from exercises where url = ?1", nativeQuery = true)
+	public Exercise findByExerciseUrl(String url);
+	
 }

@@ -141,6 +141,25 @@ select {
 	position: inherit;
 }
 
+/*--------------------Exercise------------------------*/
+
+.exerciseDetailsImg {
+  margin: 10px auto 50px auto;
+  width: 60%;
+  height: auto;
+  border: 3px solid #000000;
+  padding: 10px;
+}
+
+@media ( max-width : 600px) {
+	.exerciseDetailsImg {
+	  margin: 10px auto 50px auto;
+	  width: 100%;
+	  height: auto;
+	  border:none;
+	  padding: 0px;
+	}
+}
 
 /*--------------------Inputs,Buttons,Etc..------------------------*/
 

@@ -14,16 +14,15 @@ import javax.persistence.Table;
 @Table(name = "muscles")
 public class Muscle {
 
-	/*@GeneratedValue
-	@Id
-	private int id;
-*/
 	@Id
 	@Column(length = 30)
 	private String muscleName;
 	
 	@Column
 	private String muscleImage;
+	
+	@Column
+	private String url;
 
 	@OneToMany(mappedBy = "muscle")
 	private List<Exercise> exercises;
@@ -43,14 +42,6 @@ public class Muscle {
 		this.trainingPlan = trainingPlan;
 	}
 
-	/*public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-*/
 	public String getMuscleName() {
 		return muscleName;
 	}
@@ -82,5 +73,30 @@ public class Muscle {
 	public void setTrainingPlan(TrainingPlan trainingPlan) {
 		this.trainingPlan = trainingPlan;
 	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
+	
+	
+	/*public String getUrl() {
+		String url = muscleName.toLowerCase()
+				.replace(" ", "-")
+				.replace("á", "a")
+				.replace("í", "i")
+				.replace('é','e')
+				.replace('ű','u')
+				.replace('ú','u')
+				.replace('ü','u')
+				.replace('ö','o')
+				.replace('ó','o')
+				.replace('ő','o');
+		return url;
+	}*/
 
 }

@@ -7,29 +7,28 @@
 
 	<div layout:fragment="loginContent">
 
-		<div class="container text-center">
-			<h3>Válaszd ki milyen gyakorlatokat szeretnél</h3>
-			<br />
-			<div class="row">
-				<div class="col-lg-4 col-md-6 mb-4" th:each="exercise : ${exercises}">
-					
-					<div class="card h-100">
+		<div class="container text-left" th:each="exercise : ${exercises}">
+			<h2 class="text-center" th:text="${exercise.exerciseName}">gyakorlat</h2>
+			<br/>
 
-							<img class="card-img-top img-responsive" th:src="${exercise.exerciseImage}" height="250" width="100" />
-						
-						<div class="card-body">
-							<h4 class="card-title">
-								
-							</h4>
-						</div>
-						<div class="card-footer">
-							<a th:text="${exercise.exerciseName}">Neve</a>
-						</div>
-					</div>
-					
-				</div>
+			<div class="exerciseDetailsImg">
+				<img class="card-img-top img-responsive" th:src="${exercise.exerciseImage}" height="250" width="100" />					
 			</div>
+
+			<h4>Hatás:</h4>
+			<p th:text="${exercise.effect}"></p>
+			
+			<h4>Kiinduló pozíció:</h4>
+			<p th:text="${exercise.initialPosition}"></p>
+			
+			<h4>Mozdulat:</h4>
+			<p th:text="${exercise.motion}"></p>
+			
+			<h4>Tipp:</h4>
+			<p th:text="${exercise.trainingTip}"></p>
+				
 		</div>
+
 	</div>
 
 </body>
