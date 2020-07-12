@@ -56,7 +56,7 @@ header nav ul li a:hover, header nav ul li a.active {
 	color: #fff;
 	float: right;
 	line-height: 50px;
-	font-size: 22px;
+	font-size: 27px;
 	cursor: pointer;
 	display: none;
 }
@@ -186,6 +186,12 @@ address {
 	margin: 0 auto;
 }
 
+.form-resetpassword {
+	max-width: 400px;
+	padding: 15px 0px 15px 0px;
+	margin: 0 auto;
+}
+
 .form-signin .form-signin-heading, .form-signin .checkbox {
 	margin-bottom: 10px;
 }
@@ -213,7 +219,7 @@ address {
 	color: black;
 }
 
-.col-md-10, .col-md-8, .col-md-6, div.card{
+.col-md-14, .col-md-10, .col-md-8, .col-md-6, div.card{
 	position: static;
 }
 

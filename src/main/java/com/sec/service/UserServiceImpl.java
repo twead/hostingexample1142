@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	private UserRepository userRepository;
 	private RoleRepository roleRepository;
 	private EmailServiceImpl emailService;
-	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Autowired
 	public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,
@@ -162,6 +162,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			user.addRoles(role);
 		}
 		
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		user.setEnabled(true);
 		userRepository.save(user);
 	}
 
