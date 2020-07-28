@@ -81,22 +81,5 @@ public class Muscle {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
-	
-	
-	/*public String getUrl() {
-		String url = muscleName.toLowerCase()
-				.replace(" ", "-")
-				.replace("á", "a")
-				.replace("í", "i")
-				.replace('é','e')
-				.replace('ű','u')
-				.replace('ú','u')
-				.replace('ü','u')
-				.replace('ö','o')
-				.replace('ó','o')
-				.replace('ő','o');
-		return url;
-	}*/
 
 }

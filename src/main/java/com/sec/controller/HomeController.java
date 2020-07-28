@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sec.entity.User;
 import com.sec.service.UserService;
-import com.sec.service.UserServiceImpl;
 
 @Controller
 public class HomeController {
@@ -23,7 +22,7 @@ public class HomeController {
 	private UserService userService;
 
 	@Autowired
-	public void setUserService(UserServiceImpl userService) {
+	public HomeController(UserService userService) {
 		this.userService = userService;
 	}
 

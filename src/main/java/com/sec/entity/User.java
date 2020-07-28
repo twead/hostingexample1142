@@ -49,7 +49,6 @@ public class User {
 	}
 
 	public User(String username, String password, Boolean enabled, Set<Role> roles, UserProfile userProfile, String email) {
-		super();
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;

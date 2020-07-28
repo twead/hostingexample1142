@@ -31,7 +31,6 @@ public class TrainingPlan {
 	}
 
 	public TrainingPlan(String planName, String planDetail, List<Muscle> muscles) {
-		super();
 		this.planName = planName;
 		this.planDetail = planDetail;
 		this.muscles = muscles;

@@ -25,27 +25,28 @@ import com.sec.service.UserService;
 @Controller
 public class ResetPasswordController {
 
-	@Autowired
 	private UserService userService;
-
-	@Autowired
 	private EmailServiceImpl emailService;
-
-	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	
+	@Autowired
+	public ResetPasswordController(UserService userService, EmailServiceImpl emailService,
+			BCryptPasswordEncoder bCryptPasswordEncoder) {
+		this.userService = userService;
+		this.emailService = emailService;
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+	}
+
 	@RequestMapping(value = "/forgot", method = RequestMethod.GET)
 	public String displayForgotPasswordPage() {
 		return "forgotPassword";
 	}
 
-	// form feldolgozása forgotPassword oldalon
+	
 	@RequestMapping(value = "/forgot", method = RequestMethod.POST)
 	public String processForgotPasswordForm(@RequestParam("email") String userEmail, HttpServletRequest request,
 			Model model) {
 
-		// Adatbázisból User lekérése
 		Optional<User> optional = userService.findUserByEmail(userEmail);
 
 		if (!optional.isPresent()) {
@@ -57,12 +58,10 @@ public class ResetPasswordController {
 			User user = optional.get();
 			user.getUserProfile().setResetToken(UUID.randomUUID().toString());
 
-			// Token lementése az adatbázisba
 			userService.save(user);
 
 			String appUrl = request.getScheme() + "://" + request.getServerName();
 
-			// Email message
 			emailService.sendForgotPasswordEmail(user.getEmail(), "Elfelejtett jelszó",
 					"Hogy megújítsd a jelszavad, kattints az alábbi linkre:\n" + appUrl + "/reset?token="
 							+ user.getUserProfile().getResetToken());
@@ -70,25 +69,24 @@ public class ResetPasswordController {
 		}
 
 		return "forgotPassword";
-
 	}
 
-	// resetPassword form megjelenítése
+
 	@RequestMapping(value = "/reset", method = RequestMethod.GET)
 	public String displayResetPasswordPage(ModelAndView modelAndView, @RequestParam("token") String token) {
 
 		Optional<User> user = userService.findUserByResetToken(token);
 
-		if (user.isPresent()) { // Megtalálható a Token az adatbázisban
+		if (user.isPresent()) {
 			modelAndView.addObject("resetToken", token);
-		} else { // Nem található meg
+		} else {
 			modelAndView.addObject("errorMessage", "Oops! Ez nem egy valós link.");
 		}
 
 		return "resetPassword";
 	}
 
-	// resetPassword form feldolgozása
+	
 	@RequestMapping(value = "/reset", method = RequestMethod.POST)
 	public String setNewPassword(ModelAndView modelAndView, @RequestParam Map<String, String> requestParams,
 			RedirectAttributes redir) {
@@ -96,15 +94,9 @@ public class ResetPasswordController {
 		Optional<User> user = userService.findUserByResetToken(requestParams.get("token"));
 
 		if (user.isPresent()) {
-
 			User resetUser = user.get();
-
-			// Új jelszó beállítása
 			resetUser.setPassword(bCryptPasswordEncoder.encode(requestParams.get("password")));
-
-			// 0-ra állítjuk be, hogy ne tudjuk ismételten használni
 			resetUser.getUserProfile().setResetToken(null);
-
 			userService.save(resetUser);
 
 			return "auth/login";

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sec.entity.Muscle;
 import com.sec.service.ExerciseService;
 import com.sec.service.MuscleService;
 
@@ -18,12 +17,8 @@ public class TrainingController {
 	private ExerciseService exerciseService;
 
 	@Autowired
-	public void setMuscleService(MuscleService muscleService) {
+	public TrainingController(MuscleService muscleService, ExerciseService exerciseService) {
 		this.muscleService = muscleService;
-	}
-
-	@Autowired
-	public void setExerciseService(ExerciseService exerciseService) {
 		this.exerciseService = exerciseService;
 	}
 

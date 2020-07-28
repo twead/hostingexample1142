@@ -1,5 +1,7 @@
 package com.sec.config;
 
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -66,8 +68,15 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 				.loginPage("/login")
 				.permitAll()
 				.and()
+			.rememberMe()
+				.tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21))
+				.key("CrX3bXKSQzZ6aJCR")
+				.and()
 			.logout()
 				.logoutSuccessUrl("/login?logout")
+				.clearAuthentication(true)
+				.invalidateHttpSession(true)
+				.deleteCookies("JSESSIONID","remember-me")
 				.permitAll();
 	}
 	

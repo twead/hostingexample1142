@@ -43,12 +43,11 @@ public class Exercise {
 	private Muscle muscle;
 
 	public Exercise() {
-		super();
+		
 	}
 
 	public Exercise(String exerciseName, String exerciseImage, String effect, String initialPosition, String motion, String trainingTip,
 			int set, int reps, Muscle muscle) {
-		super();
 		this.exerciseName = exerciseName;
 		this.exerciseImage = exerciseImage;
 		this.effect = effect;
@@ -140,20 +139,4 @@ public class Exercise {
 		this.url = url;
 	}
 	
-	
-//	public String getUrl() {
-//		String url = exerciseName.toLowerCase()
-//				.replace(" ", "-")
-//				.replace("á", "a")
-//				.replace("í", "i")
-//				.replace('é','e')
-//				.replace('ű','u')
-//				.replace('ú','u')
-//				.replace('ü','u')
-//				.replace('ö','o')
-//				.replace('ó','o')
-//				.replace('ő','o');
-//		return url;
-//	}
-
 }

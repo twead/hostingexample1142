@@ -1,6 +1,5 @@
 package com.sec.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,7 +40,6 @@ public class UserProfile {
 
 	public UserProfile(User user, String fullName, String activation, String address, String phoneNumber,
 			String resetToken) {
-		super();
 		this.user = user;
 		this.fullName = fullName;
 		this.activation = activation;
